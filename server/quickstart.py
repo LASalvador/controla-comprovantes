@@ -1,3 +1,4 @@
+#Script inicial
 from __future__ import print_function
 import pickle
 import os.path
