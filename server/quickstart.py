@@ -5,14 +5,12 @@ import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from googleapiclient.http import MediaFileUpload
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
+SCOPES = ['https://www.googleapis.com/auth/drive']
 
-def main():
-    """Shows basic usage of the Drive v3 API.
-    Prints the names and ids of the first 10 files the user has access to.
-    """
+def getCreds():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -33,7 +31,10 @@ def main():
             pickle.dump(creds, token)
 
     service = build('drive', 'v3', credentials=creds)
+    return service
 
+def main():
+    service = getCreds()
     # Call the Drive v3 API
     results = service.files().list(
         pageSize=10, fields="nextPageToken, files(id, name)").execute()
@@ -45,6 +46,27 @@ def main():
         print('Files:')
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
+
+    file_metadata = {
+        'name': 'Invoicessss',
+        'mimeType': 'application/vnd.google-apps.folder'
+    }
+    file = service.files().create(body=file_metadata,
+                                    fields='id').execute()
+    print('Folder ID: %s' % file.get('id'))
+
+    folder_id = file.get('id')
+    file_metadata = {
+        'name': 'requirements.txt',
+        'parents': [folder_id]
+    }
+    media = MediaFileUpload('requirements.txt',
+                        mimetype='text/plain',
+                        resumable=True)
+    file = service.files().create(body=file_metadata,
+                                    media_body=media,
+                                    fields='id').execute()
+    print('File ID: %s' % file.get('id'))
 
 if __name__ == '__main__':
     main()
