@@ -33,9 +33,7 @@ def getCreds():
     service = build('drive', 'v3', credentials=creds)
     return service
 
-def main():
-    service = getCreds()
-    # Call the Drive v3 API
+def listFiles(service):
     results = service.files().list(
         pageSize=10, fields="nextPageToken, files(id, name)").execute()
     items = results.get('files', [])
@@ -47,26 +45,36 @@ def main():
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
 
+def mkdir(service, dirName):
     file_metadata = {
-        'name': 'Invoicessss',
+        'name': dirName,
         'mimeType': 'application/vnd.google-apps.folder'
     }
-    file = service.files().create(body=file_metadata,
+    folder = service.files().create(body=file_metadata,
                                     fields='id').execute()
-    print('Folder ID: %s' % file.get('id'))
+    return folder.get('id')
 
-    folder_id = file.get('id')
+def uploadFile(service, file_path, file_name ,folder_id):
     file_metadata = {
-        'name': 'requirements.txt',
+        'name': file_name,
         'parents': [folder_id]
     }
-    media = MediaFileUpload('requirements.txt',
+    media = MediaFileUpload(file_path,
                         mimetype='text/plain',
                         resumable=True)
     file = service.files().create(body=file_metadata,
                                     media_body=media,
                                     fields='id').execute()
-    print('File ID: %s' % file.get('id'))
+    return file.get('id')
+
+def main():
+    service = getCreds()
+    # Call the Drive v3 API
+    
+
+    
+
+    
 
 if __name__ == '__main__':
     main()
