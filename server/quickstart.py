@@ -45,9 +45,9 @@ def listFiles(service):
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
 
-def mkdir(service, dirName):
+def mkdir(service, dir_name):
     file_metadata = {
-        'name': dirName,
+        'name': dir_name,
         'mimeType': 'application/vnd.google-apps.folder'
     }
     folder = service.files().create(body=file_metadata,
@@ -67,14 +67,29 @@ def uploadFile(service, file_path, file_name ,folder_id):
                                     fields='id').execute()
     return file.get('id')
 
+def getFolderId(service, dir_name):
+    dirs = service.files().list(q="mimeType='application/vnd.google-apps.folder'", fields='files(id, name)').execute()
+    folder = next((item for item in dirs['files'] if item["name"] == dir_name), False)
+    return folder['id']
+
+def tdir(service, dir_name):
+    dirs = service.files().list(q="mimeType='application/vnd.google-apps.folder'", fields='files(id, name)').execute()
+    return next((True for item in dirs['files'] if item["name"] == dir_name), False)
+
 def main():
     service = getCreds()
     # Call the Drive v3 API
-    
-
-    
-
-    
+    # listFiles(service)
+    # folder_id = mkdir(service, 'testee')
+    # print('folder id' + folder_id)
+    # file_id = uploadFile(service, 'requirements.txt', 'requirements.txt', folder_id)
+    # print('file id' + file_id)
+    dirs = tdir(service, 'Audios')
+    dir1 = tdir(service, 'Audiosss')
+    print('tdir' + str(dirs))
+    print('tdir1' + str(dir1))
+    folder_id = getFolderId(service, 'Audios')
+    print(folder_id)
 
 if __name__ == '__main__':
     main()
