@@ -1,2 +1,3 @@
 mobile/node_modules
 server/token.pickle
+server/__pycache__
