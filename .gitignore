@@ -1,3 +1,4 @@
 mobile/node_modules
 server/token.pickle
 server/__pycache__
+server/venv/
