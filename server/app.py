@@ -5,12 +5,10 @@ app = Flask(__name__)
 def index():
     return 'Server Works'
 
-@app.route('/greet')
-def sayHello():
-    return 'Hello from Server'
+@app.route('/upload/', methods=['POST'])
+def upload_file():
+    static_file = request.files['the_file']
+    print(static_file)
+    return 'salvooo'
 
-@app.route('/user/<username>')
-def show_user(username):
-  #returns the username
-  return 'Username: %s' % username
 
