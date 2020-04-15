@@ -12,7 +12,7 @@ function FormScreen({ navigation }) {
     <View style={{ flex: 1, marginRight:25, marginLeft: 25, fontSize: 15, marginTop:20}}>
       <Text style={{ fontWeight:"bold", fontSize: 23, textAlign:"center"}}>Forms Screen</Text>
       <Form style={{marginBottom:20}}>
-        <Text>Categoria:</Text>
+        <Text>Categoria</Text>
         <RNPickerSelect style={{ fontWeight:"bold"}}
             onValueChange={(value) => console.log(value)}
             items={[
@@ -22,7 +22,7 @@ function FormScreen({ navigation }) {
             ]}
         />
 
-        <Text>Tipo:</Text>
+        <Text>Tipo</Text>
         <RNPickerSelect
             onValueChange={(value) => console.log(value)}
             items={[
