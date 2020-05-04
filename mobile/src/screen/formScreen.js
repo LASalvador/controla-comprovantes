@@ -9,8 +9,8 @@ import { Icon } from 'react-native-elements';
 
 function FormScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, marginRight:25, marginLeft: 25, fontSize: 15, marginTop:20}}>
-      <Text style={{ fontWeight:"bold", fontSize: 23, textAlign:"center"}}>Forms Screen</Text>
+    <View style={{ flex: 1, marginRight:25, marginLeft: 25, fontSize: 15, marginTop:40}}>
+      <Text style={{ fontWeight:"bold", fontSize: 23, textAlign:"center"}}>Transações</Text>
       <Form style={{marginBottom:20}}>
         <Text>Categoria</Text>
         <RNPickerSelect style={{ fontWeight:"bold"}}
