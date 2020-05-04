@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TextInput,
-  Button,
-  View,
-  AsyncStorage
-} from 'react-native';
+import { AppRegistry, StyleSheet, Text, TextInput, Button, View, AsyncStorage } from 'react-native';
 
 export default class AsyncStorageExample extends Component {
 
@@ -58,7 +50,7 @@ export default class AsyncStorageExample extends Component {
           value={this.state.myKey}
           onChangeText={(value) => this.saveKey(value)}
           />
-
+        <br />
         <Button
           style={styles.formButton}
           onPress={this.getKey.bind(this)}
@@ -66,7 +58,7 @@ export default class AsyncStorageExample extends Component {
           color="#008000"
           accessibilityLabel="Get Key"
         />
-
+        <br />
         <Button
           style={styles.formButton}
           onPress={this.resetKey.bind(this)}
@@ -107,6 +99,7 @@ const styles = StyleSheet.create({
   formButton: {
     borderWidth: 1,
     borderColor: "#555555",
+
   },
   instructions: {
     textAlign: 'center',
