@@ -7,6 +7,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import formScreen from './src/screen/formScreen';
 import homeScreen from './src/screen/homeScreen';
 import extratoScreen from './src/screen/extratoScreen';
+import cadastroScreen from './src/screen/cadastroScreen';
+import loginScreen from './src/screen/loginScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,6 +19,8 @@ function App() {
         <Drawer.Screen name="Inicio" component={homeScreen} />
         <Drawer.Screen name="Transacoes" component={formScreen} />
         <Drawer.Screen name="Extrato" component={extratoScreen} />
+        <Drawer.Screen name="Cadastro" component={cadastroScreen} />
+        <Drawer.Screen name="login" component={loginScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
