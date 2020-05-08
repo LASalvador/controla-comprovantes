@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Input } from 'react-native-elements';
-import { Button } from 'react-native-elements';
 
 function cadastroScreen({ navigation }) {
   return (
@@ -10,7 +9,7 @@ function cadastroScreen({ navigation }) {
 
       <Text style={styles.texto}>Cadastro</Text>
 
-      <Form style={styles.form}>
+      <Form>
         <Text>Nome:</Text>
         <Input placeholder='Digite seu nome completo'/>
         <Text>Email:</Text>
@@ -18,14 +17,13 @@ function cadastroScreen({ navigation }) {
         <Text>Senha:</Text>
         <Input placeholder='Valor' secureTextEntry={true}/>
       </Form>
-      <Button title="Cadastrar" style={{marginBottom:20}}/>
+      <Button title="Cadastrar" style={{marginTop:50}}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   view: {
-  flex: 1, 
   marginRight:25, 
   marginLeft: 25, 
   fontSize: 15,
@@ -36,10 +34,6 @@ texto: {
   fontWeight:"bold", 
   fontSize: 23,
   textAlign:"center"
-},
-form: {
-  marginBottom:20,
-  padding: "50 !important"
 }
 });
 
