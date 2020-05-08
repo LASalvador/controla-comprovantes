@@ -1,46 +1,45 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { Form } from '@unform/mobile';
 import { Input } from 'react-native-elements';
-import { Button } from 'react-native-elements';
+
+const styles = StyleSheet.create({
+  view: {
+    padding: 20,
+    marginTop: 30
+  },
+  texto: {
+    fontWeight:"bold", 
+    fontSize: 23,
+    textAlign:"center"
+  },
+  input: {
+    marginTop: 20,
+  },
+  button: {
+    marginTop: 30,
+  }
+});
 
 function cadastroScreen({ navigation }) {
   return (
     <View style={styles.view}>
-
       <Text style={styles.texto}>Cadastro</Text>
-
       <Form style={styles.form}>
-        <Text>Nome:</Text>
+        <Text style={styles.input}>Nome:</Text>
         <Input placeholder='Digite seu nome completo'/>
-        <Text>Email:</Text>
+        <Text style={styles.input}>Email:</Text>
         <Input placeholder='Digite seu o seu email'/>
-        <Text>Senha:</Text>
-        <Input placeholder='Valor' secureTextEntry={true}/>
+        <Text style={styles.input}>Senha:</Text>
+        <Input placeholder='Senha' secureTextEntry={true}/>
       </Form>
-      <Button title="Cadastrar" style={{marginBottom:20}}/>
+      <View style={styles.button}>
+        <Button title="Cadastrar" />
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  view: {
-  flex: 1, 
-  marginRight:25, 
-  marginLeft: 25, 
-  fontSize: 15,
-  marginTop:40, 
-  height: 50
-},
-texto: {
-  fontWeight:"bold", 
-  fontSize: 23,
-  textAlign:"center"
-},
-form: {
-  marginBottom:20,
-  padding: "50 !important"
-}
-});
+
 
 export default cadastroScreen;
