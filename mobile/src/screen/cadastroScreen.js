@@ -21,12 +21,14 @@ const styles = StyleSheet.create({
   }
 });
 
+
 function cadastroScreen({ navigation }) {
   return (
     <View style={styles.view}>
       <Text style={styles.texto}>Cadastro</Text>
-      <Form style={styles.form}>
-        <Text style={styles.input}>Nome:</Text>
+
+      <Form>
+        <Text>Nome:</Text>
         <Input placeholder='Digite seu nome completo'/>
         <Text style={styles.input}>Email:</Text>
         <Input placeholder='Digite seu o seu email'/>
@@ -36,10 +38,9 @@ function cadastroScreen({ navigation }) {
       <View style={styles.button}>
         <Button title="Cadastrar" />
       </View>
+
     </View>
   );
 }
-
-
 
 export default cadastroScreen;
