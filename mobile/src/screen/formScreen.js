@@ -35,12 +35,16 @@ function FormScreen({ navigation }) {
         <Input placeholder='Valor'/>
       </Form>
 
-      <Button title="Foto" style={{marginBottom:20}}/>
-      
-      <Button
-        title="Go to Form... again"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <View style={{marginTop: 20}}>
+        <Button title="Foto"/>
+      </View>
+
+      <View style={{marginTop: 20}}>
+        <Button
+          title="Enviar"
+          onPress={() => navigation.navigate('Inicio')}
+        />
+      </View>
       
     </View>
   );

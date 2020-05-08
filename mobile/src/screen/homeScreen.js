@@ -15,10 +15,13 @@ function HomeScreen({ navigation }) {
       <Card>
         <Text style={{textAlign: "center"}}>Caixa : 100</Text>
       </Card>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Form')}
-      />
+      <View style={{marginTop: 40}}>
+        <Button
+          title="Veja as transações"
+          
+          onPress={() => navigation.navigate('Transacoes')}
+        />
+      </View>
     </View>
   );
 }
