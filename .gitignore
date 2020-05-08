@@ -4,3 +4,4 @@ server/token.pickle
 server/__pycache__
 server/venv/
 server/var/
+server/src/__pycache__
