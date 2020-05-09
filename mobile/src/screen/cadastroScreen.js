@@ -32,14 +32,8 @@ export default class loginScreen extends React.Component {
             placeholderTextColor="#003f5c"
             onChangeText={text => this.setState({password:text})}/>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
+          <Text style={styles.loginText}>Cadastrar</Text>
         </TouchableOpacity>
 
   
@@ -74,10 +68,6 @@ const styles = StyleSheet.create({
     height:50,
     color:"black"
   },
-  forgot:{
-    color:"black",
-    fontSize:11
-  },
   loginBtn:{
     width:"80%",
     backgroundColor:"#005796",
@@ -89,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   loginText:{
-    color:"black"
+    color:"white"
   }
 });
       
