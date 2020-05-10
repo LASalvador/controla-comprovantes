@@ -1,46 +1,85 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { Form } from '@unform/mobile';
-import { Input } from 'react-native-elements';
+import React from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-const styles = StyleSheet.create({
-  view: {
-    padding: 20,
-    marginTop: 30
-  },
-  texto: {
-    fontWeight:"bold", 
-    fontSize: 23,
-    textAlign:"center"
-  },
-  input: {
-    marginTop: 20,
-  },
-  button: {
-    marginTop: 30,
+export default class loginScreen extends React.Component {
+  state={
+    email:"",
+    password:""
   }
-});
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text style={styles.logo}>Cadastro</Text>
+        <View style={styles.inputView} >
+          <TextInput  
+            style={styles.inputText}
+            placeholder="Digite seu nome" 
+            placeholderTextColor="#003f5c"
+            onChangeText={text => this.setState({email:text})}/>
+        </View>
+        <View style={styles.inputView} >
+          <TextInput  
+            style={styles.inputText}
+            placeholder="Digite seu email" 
+            placeholderTextColor="#003f5c"
+            onChangeText={text => this.setState({email:text})}/>
+        </View>
+        <View style={styles.inputView} >
+          <TextInput  
+            secureTextEntry
+            style={styles.inputText}
+            placeholder="Digite sua senha" 
+            placeholderTextColor="#003f5c"
+            onChangeText={text => this.setState({password:text})}/>
+        </View>
+        <TouchableOpacity style={styles.loginBtn}>
+          <Text style={styles.loginText}>Cadastrar</Text>
+        </TouchableOpacity>
 
-
-function cadastroScreen({ navigation }) {
-  return (
-    <View style={styles.view}>
-      <Text style={styles.texto}>Cadastro</Text>
-
-      <Form>
-        <Text>Nome:</Text>
-        <Input placeholder='Digite seu nome completo'/>
-        <Text style={styles.input}>Email:</Text>
-        <Input placeholder='Digite seu o seu email'/>
-        <Text style={styles.input}>Senha:</Text>
-        <Input placeholder='Senha' secureTextEntry={true}/>
-      </Form>
-      <View style={styles.button}>
-        <Button title="Cadastrar" />
+  
       </View>
-
-    </View>
-  );
+    );
+  }
 }
 
-export default cadastroScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo:{
+    fontWeight:"bold",
+    fontSize:50,
+    color:"#005795", 
+    marginBottom:40
+  },
+  inputView:{
+    width:"80%",
+    backgroundColor:"#f2f2f2",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20
+  },
+  inputText:{
+    height:50,
+    color:"black"
+  },
+  loginBtn:{
+    width:"80%",
+    backgroundColor:"#005796",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10
+  },
+  loginText:{
+    color:"white"
+  }
+});
+      

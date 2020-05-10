@@ -1,11 +1,75 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 
-function extratoScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, marginRight:25, marginLeft: 25, fontSize: 15, marginTop:40}}>
-      <Text style={{ fontWeight:"bold", fontSize: 23, textAlign:"center"}}>Extrato</Text>
-    </View>
-  );
+export default class extratoScreen extends Component {
+
+  state={
+    myKey: null
+  }
+  constructor(props) {
+    super(props);
+  }
+
+  setValue(value) {
+      this.setState({myKey:value})
+  }
+
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Extrato!
+        </Text>
+
+        <TextInput
+          style={styles.formInput}
+          placeholder="Insira seu saldo atual!"
+          value={this.state.myKey}
+          onChangeText={(value) => this.setValue(value)}
+          />      
+
+        <Text style={styles.instructions}>
+          Saldo = {this.state.myKey}
+        </Text>
+
+
+      </View>
+    );
+  }
 }
-export default extratoScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 30,
+    flex: 1,
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 20,
+    fontWeight: 'bold',
+  },
+  formInput: {
+    paddingLeft: 5,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#555555",
+  },
+  formButton: {
+    borderWidth: 1,
+    borderColor: "#555555",
+
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+    marginTop: 15,
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+});
+
