@@ -4,7 +4,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 export default class loginScreen extends React.Component {
   state={
     email:"",
-    password:""
+    password:"",
+    name: ""
   }
   render(){
     return (
@@ -15,7 +16,7 @@ export default class loginScreen extends React.Component {
             style={styles.inputText}
             placeholder="Digite seu nome" 
             placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({email:text})}/>
+            onChangeText={text => this.setState({name:text})}/>
         </View>
         <View style={styles.inputView} >
           <TextInput  
