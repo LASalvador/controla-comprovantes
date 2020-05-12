@@ -1,11 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Firebase from '../../config/firebase';
 
 export default class loginScreen extends React.Component {
   state={
     email:"",
     password:""
   }
+
+  handleLogin = () => {
+    const { email, password } = this.state
+
+    Firebase.auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => this.props.navigation.navigate('Inicio'))
+        .catch(error => console.log(error))
+  }
+
+  handleCadastro = () => {
+    this.props.navigation.navigate('Cadastro');
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -26,13 +41,16 @@ export default class loginScreen extends React.Component {
             onChangeText={text => this.setState({password:text})}/>
         </View>
         <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
+          <Text style={styles.forgot}>Esqueceu a senha?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
+        <TouchableOpacity 
+          style={styles.loginBtn}
+          onPress={this.handleLogin}
+        >
+          <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
+          <Text style={styles.loginText}>Cadastrar</Text>
         </TouchableOpacity>
 
   

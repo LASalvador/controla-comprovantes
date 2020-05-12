@@ -20,7 +20,7 @@ function App() {
         <Drawer.Screen name="Transacoes" component={formScreen} />
         <Drawer.Screen name="Extrato" component={extratoScreen} />
         <Drawer.Screen name="Cadastro" component={cadastroScreen} />
-        <Drawer.Screen name="login" component={loginScreen} />
+        <Drawer.Screen name="Login" component={loginScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
