@@ -82,7 +82,10 @@ function App({navigation}) {
         
         dispatch({ type: 'SIGN_IN', token: user.uid });
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signOut: async () => { 
+        await AsyncStorage.removeItem('userToken');
+        dispatch({ type: 'SIGN_OUT' }) 
+      },
       signUp: async data => {
         await Firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         const user = Firebase.auth().currentUser
@@ -112,14 +115,15 @@ function App({navigation}) {
                 name="Login" 
                 component={loginScreen} 
                 initialParams={{authContext}}
-              />
+                />
             </>
           ) : (
             <>
               <Drawer.Screen 
                 name="Inicio" 
-                component={homeScreen} 
-              />
+                component={homeScreen}
+                initialParams={{authContext}}
+                />
               <Drawer.Screen 
                 name="Transacoes" 
                 component={formScreen} 

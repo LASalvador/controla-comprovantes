@@ -1,14 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 
 export default class loginScreen extends React.Component {
   state={
     email:"",
     password:""
   }
+
+  constructor (props) {
+    super(props)
+  }
+
+  componentDidMount () {
+    console.log(this.props);
+  }
+
   render(){
     return (
       <View style={styles.container}>
+        <TouchableOpacity 
+          style={styles.loginBtn}
+          onPress={this.props.route.params.authContext.signOut}
+        >
+          <Text style={styles.loginText}>Sair</Text>
+        </TouchableOpacity>
+
         <Text style={styles.logo}>Controle</Text>
         <View style={styles.inputView} >
           <Text 
@@ -67,7 +83,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
     fontSize:20
   },
-  /*loginBtn:{
+  loginBtn:{
     width:"80%",
     backgroundColor:"#005796",
     borderRadius:25,
@@ -76,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:40,
     marginBottom:10
-  },*/
+  },
   loginText:{
     color:"white"
   }
