@@ -1,21 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Firebase from '../../config/firebase';
 
 export default class loginScreen extends React.Component {
   state={
     email:"",
     password:""
   }
+  constructor (props) {
+    super(props)
+  }
 
   handleLogin = () => {
     const { email, password } = this.state
-
-    Firebase.auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => this.props.navigation.navigate('Inicio'))
-        .catch(error => console.log(error))
-  }
+    const { signIn } = this.props.route.params.authContext
+    signIn({email, password})
+    
+}
 
   handleCadastro = () => {
     this.props.navigation.navigate('Cadastro');

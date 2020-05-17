@@ -13,15 +13,14 @@ export default class loginScreen extends React.Component {
   constructor (props) {
     super(props)
   }
-
+  
+  
   handleSignUp = () => {
     const { email, password } = this.state
-    Firebase.auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => this.props.navigation.navigate('Inicio'))
-        .catch(error => console.log(error))
-}
-
+    const { signUp } = this.props.route.params.authContext
+    signUp({email, password})
+  }
+  
   render(){
     return (
       <View style={styles.container}>
