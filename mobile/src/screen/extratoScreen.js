@@ -18,7 +18,7 @@ export default class extratoScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.logo}>
           Extrato!
         </Text>
 
@@ -43,20 +43,22 @@ const styles = StyleSheet.create({
   container: {
     padding: 30,
     flex: 1,
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    justifyContent: 'center',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 20,
-    fontWeight: 'bold',
+  logo:{
+    fontWeight:"bold",
+    fontSize:50,
+    color:"#005795", 
+    marginBottom:40
   },
   formInput: {
     paddingLeft: 5,
     height: 50,
     borderWidth: 1,
     borderColor: "#555555",
+    borderRadius:25,
   },
   formButton: {
     borderWidth: 1,

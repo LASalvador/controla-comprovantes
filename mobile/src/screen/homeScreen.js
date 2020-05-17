@@ -9,7 +9,7 @@ export default class loginScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>Inicio</Text>
+        <Text style={styles.logo}>Controle</Text>
         <View style={styles.inputView} >
           <Text 
             style={styles.inputText}
@@ -29,9 +29,6 @@ export default class loginScreen extends React.Component {
             placeholderTextColor="#003f5c"
           >Receita: 50</Text>
         </View>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Cadastrar</Text>
-        </TouchableOpacity>
 
   
       </View>
@@ -42,7 +39,7 @@ export default class loginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#e6f4ff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -50,11 +47,12 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     fontSize:50,
     color:"#005795", 
-    marginBottom:40
+    /*marginBottom:40*/
+    margin: 40
   },
   inputView:{
     width:"80%",
-    backgroundColor:"#f2f2f2",
+    backgroundColor:"#fff",
     borderRadius:25,
     height:50,
     marginBottom:20,
@@ -63,9 +61,13 @@ const styles = StyleSheet.create({
   },
   inputText:{
     height:50,
-    color:"black"
+    color:"black",
+    justifyContent:"center",
+    textAlign: "center",
+    marginTop: 18,
+    fontSize:20
   },
-  loginBtn:{
+  /*loginBtn:{
     width:"80%",
     backgroundColor:"#005796",
     borderRadius:25,
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:40,
     marginBottom:10
-  },
+  },*/
   loginText:{
     color:"white"
   }
