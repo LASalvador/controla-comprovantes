@@ -1,8 +1,8 @@
 """transacao table
 
-Revision ID: 729653f6d292
-Revises: 922906b75fd8
-Create Date: 2020-05-10 12:52:11.667780
+Revision ID: 8c2dd4b3c9f9
+Revises: 83f3a84f0c47
+Create Date: 2020-05-19 10:41:49.268559
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '729653f6d292'
-down_revision = '922906b75fd8'
+revision = '8c2dd4b3c9f9'
+down_revision = '83f3a84f0c47'
 branch_labels = None
 depends_on = None
 
@@ -26,7 +26,11 @@ def upgrade():
     sa.Column('valor', sa.Integer(), nullable=False),
     sa.Column('data', sa.DateTime(), nullable=True),
     sa.Column('conta_id', sa.Integer(), nullable=True),
+    sa.Column('categoria_id', sa.Integer(), nullable=True),
+    sa.Column('usuario_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['categoria_id'], ['categoria.id'], ),
     sa.ForeignKeyConstraint(['conta_id'], ['conta.id'], ),
+    sa.ForeignKeyConstraint(['usuario_id'], ['usuario.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_transacao_data'), 'transacao', ['data'], unique=False)
