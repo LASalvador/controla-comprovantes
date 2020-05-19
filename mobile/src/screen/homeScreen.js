@@ -18,13 +18,6 @@ export default class loginScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <TouchableOpacity 
-          style={styles.loginBtn}
-          onPress={this.props.route.params.authContext.signOut}
-        >
-          <Text style={styles.loginText}>Sair</Text>
-        </TouchableOpacity>
-
         <Text style={styles.logo}>Controle</Text>
         <View style={styles.inputView} >
           <Text 
@@ -46,7 +39,13 @@ export default class loginScreen extends React.Component {
           >Receita: 50</Text>
         </View>
 
-  
+        <TouchableOpacity 
+          style={styles.loginBtn}
+          onPress={this.props.route.params.authContext.signOut}
+        >
+          <Text style={styles.loginText}>Sair</Text>
+        </TouchableOpacity>
+              
       </View>
     );
   }
