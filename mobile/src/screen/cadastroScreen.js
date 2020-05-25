@@ -1,20 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Firebase from '../../config/firebase';
+import CampoEntrada from '../components/CampoEntrada';
 
 export default class loginScreen extends React.Component {
   state={
     name: "",
     email:"",
     password:"",
-    name: ""
   }
 
   constructor (props) {
     super(props)
   }
-  
-  
+   
   handleSignUp = () => {
     const { email, password } = this.state
     const { signUp } = this.props.route.params.authContext
@@ -26,11 +25,10 @@ export default class loginScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.logo}>Cadastre-se</Text>
         <View style={styles.inputView} >
-          <TextInput  
-            style={styles.inputText}
-            placeholder="Digite seu nome" 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({name:text})}/>
+          <CampoEntrada 
+            placeholder="Digite seu nome"
+            entrada={this.state.name}
+          />
         </View>
         <View style={styles.inputView} >
           <TextInput  
@@ -53,7 +51,6 @@ export default class loginScreen extends React.Component {
         >
           <Text style={styles.loginText}>Cadastrar-se</Text>
         </TouchableOpacity>
-
   
       </View>
     );
