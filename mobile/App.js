@@ -12,6 +12,7 @@ import homeScreen from './src/screen/homeScreen';
 import extratoScreen from './src/screen/extratoScreen';
 import cadastroScreen from './src/screen/cadastroScreen';
 import loginScreen from './src/screen/loginScreen';
+import categoriaScreen from './src/screen/categoriaScreen';
 
 
 function SplashScreen() {
@@ -127,6 +128,10 @@ function App({navigation}) {
               <Drawer.Screen 
                 name="Transacoes" 
                 component={formScreen} 
+              />
+              <Drawer.Screen 
+                name="Categoria" 
+                component={categoriaScreen} 
               />
               <Drawer.Screen 
                 name="Extrato" 

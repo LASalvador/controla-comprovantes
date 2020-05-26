@@ -7,6 +7,7 @@ import { Picker } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Icon } from 'react-native-elements';
 import {StyleSheet} from 'react-native';
+import { ListItem } from 'react-native-elements'
 
 export default class loginScreen extends React.Component {
   state={
@@ -28,46 +29,7 @@ export default class loginScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-      <Text style={styles.logo}>Transações</Text>
-      <Form style={styles.inputView}>
-         {/*<Text style={styles.topoText}>Categoria</Text>*/}
-         <View style={styles.fundo}>
-        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Água', value: 'agua' },
-                { label: 'Luz', value: 'luz' },
-                { label: 'Transporte', value: 'transporte' },
-            ]}
-        />
-        </View>
-
-        <View style={styles.fundo}>
-         {/*<Text style={styles.topoText}>Tipo</Text>*/}
-        <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Água', value: 'agua' },
-                { label: 'Luz', value: 'luz' },
-                { label: 'Transporte', value: 'transporte' },
-            ]}
-        />
-        </View>
-
-
-        <View style={styles.fundo}>
-        <TextInput placeholder='Valor'/>
-        </View>
-      </Form>
-
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Foto</Text>
-        </TouchableOpacity>
-
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Enviar</Text>
-        </TouchableOpacity>
-      
+      <Text style={styles.logo}>Categoria</Text>
     </View>
     );
   }
