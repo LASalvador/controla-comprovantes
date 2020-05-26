@@ -59,7 +59,7 @@ class Transacao(db.Model):
     __tablename__ = 'transacao'
     id = db.Column(db.Integer, primary_key=True)
     desc = db.Column(db.String(140))
-    tipo = db.Column(db.String(140))
+    tipo = db.Column(db.Integer, db.ForeignKey('tipo_transacao.id'))
     comprovante = db.Column(db.String(140))
     valor = db.Column(db.Integer, nullable=False)
     data = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -69,4 +69,9 @@ class Transacao(db.Model):
 
     def __repr__(self):
         return '<Transacao {}>'.format(self.desc)
+
+class TipoTransacao(db.Model):
+    __tablename__ = 'tipo_transacao'
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(20))
 
