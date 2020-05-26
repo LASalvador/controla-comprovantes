@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Firebase from '../../config/firebase';
 import CampoEntrada from '../components/CampoEntrada';
+import Botao from '../components/Botao';
 
 export default class loginScreen extends React.Component {
   state={
@@ -31,27 +32,18 @@ export default class loginScreen extends React.Component {
           />
         </View>
         <View style={styles.inputView} >
-          <TextInput  
-            style={styles.inputText}
-            placeholder="Digite seu email" 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({email:text})}/>
+          <CampoEntrada 
+            placeholder="Digite seu email"
+            entrada={this.state.email}
+          />
         </View>
         <View style={styles.inputView} >
-          <TextInput  
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Digite sua senha" 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({password:text})}/>
+          <CampoEntrada 
+            placeholder="Digite sua senha"
+            entrada={this.state.password}
+          />
         </View>
-        <TouchableOpacity 
-          style={styles.loginBtn}
-          onPress={this.handleSignUp}
-        >
-          <Text style={styles.loginText}>Cadastrar-se</Text>
-        </TouchableOpacity>
-  
+        <Botao onPress={this.handleSignUp} title="Cadastrar"/>
       </View>
     );
   }
