@@ -6,7 +6,10 @@ class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     uid = db.Column(db.String(200), index=True, unique=True, nullable=False)
-    nome = db.Column(db.String(64), index=False, unique=True, nullable=False)
+    nome = db.Column(db.String(64), index=False, nullable=False)
+
+    def asdict(self):
+        return {'id': self.id, 'email': self.email, 'uid': self.uid, 'nome': self.nome}
 
     def __repr__(self):
         return '<Usuario {}>'.format(self.nome)
@@ -19,6 +22,9 @@ class UsuarioConta(db.Model):
 
     def __repr__(self):
         return '<usuarioXConta {}>'.format(self.id)
+    
+    def asdict(self):
+        return {'id': self.id, 'usuario_id': self.usuario_id, 'conta_id': self.conta_id}
 
 
 class Perfil(db.Model):
@@ -28,6 +34,9 @@ class Perfil(db.Model):
 
     def __repr__(self):
         return '<Perfil {}>'.format(self.desc)
+
+    def asdict(self):
+        return {'id': self.id, 'desc': self.desc}
         
 class Categoria(db.Model):
     __tablename__ = 'categoria'
@@ -37,6 +46,9 @@ class Categoria(db.Model):
     def __repr__(self):
         return '<Categoria {}>'.format(self.desc)
 
+    def asdict(self):
+        return {'id': self.id, 'desc': self.desc} 
+
 class ContaCategoria(db.Model):
     __tablename__ = 'contaXusuario'
     id = db.Column(db.Integer, primary_key=True)
@@ -45,6 +57,9 @@ class ContaCategoria(db.Model):
 
     def __repr__(self):
         return '<contaXusuario {}>'.format(self.id)
+    
+    def asdict(self):
+        return {'id': self.id, 'usuario_id': self.usuario_id, 'categoria_id': self.categoria_id}
 
 class Conta(db.Model):
     __tablename__ = 'conta'
@@ -54,6 +69,9 @@ class Conta(db.Model):
 
     def __repr__(self):
         return '<Conta {}>'.format(self.id)
+
+    def asdict(self):
+        return {'id': self.id, 'saldo': self.saldo, 'perfil_id': self.perfil_id }
 
 class Transacao(db.Model):
     __tablename__ = 'transacao'
@@ -74,4 +92,9 @@ class TipoTransacao(db.Model):
     __tablename__ = 'tipo_transacao'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(20))
+    
+    def __repr__(self):
+        return '<Transacao {}>'.format(self.nome)
 
+    def asdict(self):
+        return {'id': self.id, 'nome': self.nome }
