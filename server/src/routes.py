@@ -79,6 +79,26 @@ def get_usuarios_conta(conta_id):
 
     return response
 
+@app.route('/nova_conta', methods=['POST'])
+def nova_conta():
+    req = request.json
+
+    conta = Conta(saldo = 0, perfil_id = req['perfil_id'])
+    db.session.add(conta)
+    db.session.commit()
+
+    usuarioConta = UsuarioConta(usuario_id = req['usuario_id'], conta_id = conta.id)
+    db.session.add(usuarioConta)
+    db.session.commit()
+
+    response = jsonify({
+        'conta_id': conta.id,
+        'usuario_conta_id': usuarioConta.id
+    })
+
+    return response
+
+
 @app.route('/conta/<int:user_id>', methods=['GET'])
 def get_conta_usuarios(user_id):
     contas = db.session.query(UsuarioConta).join(Conta, UsuarioConta.conta_id == Conta.id).join(Perfil, Conta.perfil_id == Perfil.id).add_columns(Perfil.desc, Conta.saldo).filter(UsuarioConta.usuario_id == user_id).all()
