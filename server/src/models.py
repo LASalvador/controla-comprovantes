@@ -50,7 +50,7 @@ class Categoria(db.Model):
         return {'id': self.id, 'desc': self.desc} 
 
 class ContaCategoria(db.Model):
-    __tablename__ = 'contaXusuario'
+    __tablename__ = 'contaXcategoria'
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
     categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id'))

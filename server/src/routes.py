@@ -46,6 +46,38 @@ def post_usuario():
 
     return response
 
+@app.route('/novo',methods=['POST'])
+def post_novo_usuario():
+    req = request.json
+
+    usuario = Usuario(nome = req['nome'], email = req['email'], uid = req['uid'])
+    db.session.add(usuario)
+    db.session.commit()
+
+    usuarioConta = UsuarioConta(usuario_id = usuario.id, conta_id = req['conta_id'])
+    db.session.add(usuarioConta)
+    db.session.commit()
+
+    response = jsonify({
+        'user_id': usuario.id
+    })
+
+
+@app.route('/usuarios/<int:conta_id>', methods=['GET'])
+def get_usuarios_conta(conta_id):
+    users = db.session.query(UsuarioConta).join(Usuario, UsuarioConta.usuario_id == Usuario.id).add_columns(Usuario.nome).filter(UsuarioConta.conta_id == conta_id).all()
+    users_list = []
+    for user in users:
+        users_dict = {}
+        users_dict = user[0].asdict()
+        users_dict['usuario_nome'] = user[1]
+        users_list.append(users_dict)
+
+    response = jsonify({
+        'usuarios_conta': users_list
+    })
+
+    return response
 
 @app.route('/tptransacao', methods=['GET'])
 def get_tp_transacoes():
@@ -74,3 +106,12 @@ def get_perfil():
     })
 
     return response
+
+
+def list_to_dict(model_list):
+    list_response = []
+
+    for item in model_list:
+        list_response.append(item.asdict())
+    
+    return list_response
