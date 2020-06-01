@@ -59,7 +59,7 @@ def post_novo_usuario():
     db.session.commit()
 
     response = jsonify({
-        'user_id': usuario.id
+        'user_id': usuario. id
     })
 
 
@@ -77,6 +77,22 @@ def get_usuarios_conta(conta_id):
         'usuarios_conta': users_list
     })
 
+    return response
+
+@app.route('/conta/<int:user_id>', methods=['GET'])
+def get_conta_usuarios(user_id):
+    contas = db.session.query(UsuarioConta).join(Conta, UsuarioConta.conta_id == Conta.id).join(Perfil, Conta.perfil_id == Perfil.id).add_columns(Perfil.desc, Conta.saldo).filter(UsuarioConta.usuario_id == user_id).all()
+    contas_list = []
+    for conta in contas:
+        conta_dict = {}
+        conta_dict = conta[0].asdict()
+        conta_dict['perfil'] = conta[1]
+        conta_dict['saldo'] = conta[2]
+        contas_list.append(conta_dict)
+
+    response = jsonify({
+        'contas_usuario' : contas_list
+    })
     return response
 
 @app.route('/tptransacao', methods=['GET'])
