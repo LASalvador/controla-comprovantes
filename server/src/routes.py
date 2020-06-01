@@ -1,6 +1,6 @@
 from flask import request, json, jsonify
 from src import app, db
-from src.models import TipoTransacao, Perfil, Usuario, Conta, UsuarioConta
+from src.models import TipoTransacao, Perfil, Usuario, Conta, UsuarioConta, Transacao, Categoria
 
 @app.route('/')
 def index():
@@ -16,12 +16,41 @@ def post_conta():
 
 @app.route('/transacao', methods=['POST'])
 def post_transacao():
-    return "salvar transacao"
+    req = request.json
+
+    transacao = Transacao(desc = req['desc'], tipo = req['tipo_id'], valor = req['valor'], conta_id = req['conta_id'], categoria_id = req['categoria_id'], usuario_id = req['usuario_id'])
+    
+    db.session.add(transacao)
+    db.session.commit()
+
+    transacao_dict = transacao.asdict()
+
+    response = jsonify({
+        'transacao': transacao_dict
+    })
+
+    return response
 
 
-@app.route('/transacoes', methods=['GET'])
-def get_transacoes():
-    return "listar transacao"
+@app.route('/transacoes/<int:conta_id>', methods=['GET'])
+def get_transacoes(conta_id):
+
+    transacoes = db.session.query(Transacao).join(TipoTransacao, Transacao.tipo == TipoTransacao.id).join(Categoria, Transacao.categoria_id == Categoria.id).join(Usuario, Transacao.usuario_id == Usuario.id).add_columns(TipoTransacao.nome, Categoria.desc, Usuario.nome).filter(Transacao.conta_id == conta_id).all()
+
+    transacoes_list = []
+    for transacao in transacoes:
+        transacao_dict = {}
+        transacao_dict = transacao[0].asdict()
+        transacao_dict['tipo_desc'] = transacao[1]
+        transacao_dict['categoria_desc'] = transacao[2]
+        transacao_dict['usuario_nome'] = transacao[3]
+        transacoes_list.append(transacao_dict)
+
+    response = jsonify({
+        'transacoes': transacoes_list
+    })
+
+    return response
 
 @app.route('/usuario', methods=['POST'])
 def post_usuario():
@@ -113,7 +142,7 @@ def get_conta_usuarios(user_id):
     response = jsonify({
         'contas_usuario' : contas_list
     })
-    return response
+    return response   
 
 @app.route('/tptransacao', methods=['GET'])
 def get_tp_transacoes():
@@ -143,11 +172,3 @@ def get_perfil():
 
     return response
 
-
-def list_to_dict(model_list):
-    list_response = []
-
-    for item in model_list:
-        list_response.append(item.asdict())
-    
-    return list_response
