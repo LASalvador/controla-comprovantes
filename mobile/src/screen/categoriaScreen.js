@@ -1,44 +1,32 @@
-import * as React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Form } from '@unform/mobile';
-import { Input } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { Picker } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import { Icon } from 'react-native-elements';
+import React , { useState }from 'react';
+import { Button, View, Text,  FlatList } from 'react-native';
 import {StyleSheet} from 'react-native';
-import { ListItem } from 'react-native-elements'
 
-export default class loginScreen extends React.Component {
-  state={
-    name: "",
-    email:"",
-    password:"",
-  }
-
-  constructor (props) {
-    super(props)
-  }
-   
-  handleSignUp = () => {
-    const { email, password } = this.state
-    const { signUp } = this.props.route.params.authContext
-    signUp({email, password})
-  }
+export default function categoriaScreen(){
+  const [categoria] = useState([
+    {categoria: 'luz', key:'1'},
+    {categoria: 'Agua', key:'2'},
+    {categoria: 'Passeio', key:'3'}
+  ]);
   
-  render(){
-    return (
-      <View style={styles.container}>
+  return(
+    <View style={styles.container}>
       <Text style={styles.logo}>Categoria</Text>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={categoria}
+        renderItem={({ item }) => (
+        <Text>{item.categoria}</Text>
+        )}
+      />
     </View>
-    );
-  }
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e6f4ff',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -46,45 +34,42 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     fontSize:50,
     color:"#005795", 
-    /*marginBottom:40*/
-    margin: 40
+    marginBottom:40
   },
-  fundo:{
+  inputView:{
     width:"80%",
-    backgroundColor:"#fff",
-    /*borderRadius:25,*/
+    backgroundColor:"#f2f2f2",
+    borderRadius:25,
     height:50,
     marginBottom:20,
     justifyContent:"center",
-    padding:10
+    padding:20
   },
   inputText:{
     height:50,
-    color:"black",
-    justifyContent:"center",
-    textAlign: "center",
-    marginTop: 18,
-    fontSize:20
+    color:"black"
   },
   loginBtn:{
-    width:"50%",
+    width:"80%",
     backgroundColor:"#005796",
     borderRadius:25,
     height:50,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:20,
+    marginTop:40,
     marginBottom:10
   },
+  fundo:{
+    width:"80%",
+    color: "#005796",
+    backgroundColor:"#f2f2f2",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:10
+  },
   loginText:{
-    color: "white",
-  },
-  /*topoText:{
-    color: "#000",
-  },*/
-  valortext:{
-    color: "black",
-  },
-
-  
+    color:"white"
+  }
 });
