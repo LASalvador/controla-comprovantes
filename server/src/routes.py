@@ -91,6 +91,8 @@ def post_novo_usuario():
         'user_id': usuario. id
     })
 
+    return response
+
 
 @app.route('/usuarios/<int:conta_id>', methods=['GET'])
 def get_usuarios_conta(conta_id):
