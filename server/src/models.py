@@ -88,6 +88,9 @@ class Transacao(db.Model):
     def __repr__(self):
         return '<Transacao {}>'.format(self.desc)
 
+    def asdict(self):
+        return {'id': self.id, 'desc': self.desc, 'tipo_id': self.tipo, 'valor': self.valor, 'data': self.data, 'conta_id': self.conta_id, 'categoria_id': self.categoria_id, 'usuario_id': self.usuario_id }
+
 class TipoTransacao(db.Model):
     __tablename__ = 'tipo_transacao'
     id = db.Column(db.Integer, primary_key=True)
