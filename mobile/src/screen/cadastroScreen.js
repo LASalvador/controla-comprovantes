@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Firebase from '../../config/firebase';
 import CampoEntrada from '../components/CampoEntrada';
+import RNPickerSelect from 'react-native-picker-select';
 import Botao from '../components/Botao';
 
 export default class loginScreen extends React.Component {
@@ -43,6 +44,16 @@ export default class loginScreen extends React.Component {
             entrada={this.state.password}
           />
         </View>
+        <View style={styles.fundo}>
+        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Pessoa Física', value: 'pessoaFisica' },
+                { label: 'Pessoa Jurídica', value: 'pessoaJuridica' },
+            ]}
+        />
+        </View>
+
         <Botao onPress={this.handleSignUp} title="Cadastrar"/>
       </View>
     );
@@ -84,6 +95,16 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:40,
     marginBottom:10
+  },
+  fundo:{
+    width:"80%",
+    color: "#005796",
+    backgroundColor:"#f2f2f2",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:10
   },
   loginText:{
     color:"white"
