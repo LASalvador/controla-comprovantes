@@ -1,6 +1,6 @@
 from flask import request, json, jsonify
 from src import app, db
-from src.models import TipoTransacao, Perfil, Usuario, Conta, UsuarioConta, Transacao, Categoria
+from src.models import TipoTransacao, Perfil, Usuario, Conta, UsuarioConta, Transacao, Categoria, ContaCategoria
 
 @app.route('/')
 def index():
@@ -173,4 +173,22 @@ def get_perfil():
     })
 
     return response
+
+@app.route('/categoria/<int:conta_id>', methods=['GET'])
+def get_categorias(conta_id):
+    categorias = db.session.query(ContaCategoria).join(Categoria, ContaCategoria.conta_id == Categoria.id).add_columns(Categoria.desc).filter(ContaCategoria.conta_id == conta_id).all()
+    categoria_list = []
+    for categoria in categorias:
+        categoria_dict = {}
+        categoria_dict = categoria[0].asdict()
+        categoria_dict['categoria_desc'] = categoria[1]
+        categoria_list.append(categoria_dict)
+
+    response = jsonify({
+        'categorias_conta': categoria_list
+    })
+
+    return response
+
+
 

@@ -52,14 +52,14 @@ class Categoria(db.Model):
 class ContaCategoria(db.Model):
     __tablename__ = 'contaXcategoria'
     id = db.Column(db.Integer, primary_key=True)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    conta_id = db.Column(db.Integer, db.ForeignKey('conta.id'))
     categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id'))
 
     def __repr__(self):
         return '<contaXusuario {}>'.format(self.id)
     
     def asdict(self):
-        return {'id': self.id, 'usuario_id': self.usuario_id, 'categoria_id': self.categoria_id}
+        return {'id': self.id, 'conta_id': self.conta_id, 'categoria_id': self.categoria_id}
 
 class Conta(db.Model):
     __tablename__ = 'conta'
