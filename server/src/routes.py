@@ -1,18 +1,11 @@
 from flask import request, json, jsonify
 from src import app, db
 from src.models import TipoTransacao, Perfil, Usuario, Conta, UsuarioConta, Transacao, Categoria, ContaCategoria
+from flask_sqlalchemy import SQLAlchemy
 
 @app.route('/')
 def index():
     return "Server Works"
-
-@app.route('/home')
-def get_home():
-    return 'HOMEEE'
-
-@app.route('/conta', methods=['POST'])
-def post_conta():
-    return "salvar conta"
 
 @app.route('/transacao', methods=['POST'])
 def post_transacao():
@@ -176,7 +169,7 @@ def get_perfil():
 
 @app.route('/categoria/<int:conta_id>', methods=['GET'])
 def get_categorias(conta_id):
-    categorias = db.session.query(ContaCategoria).join(Categoria, ContaCategoria.conta_id == Categoria.id).add_columns(Categoria.desc).filter(ContaCategoria.conta_id == conta_id).all()
+    categorias = db.session.query(ContaCategoria).join(Categoria, ContaCategoria.categoria_id == Categoria.id).add_columns(Categoria.desc).filter(ContaCategoria.conta_id == conta_id).all()
     categoria_list = []
     for categoria in categorias:
         categoria_dict = {}
@@ -189,6 +182,49 @@ def get_categorias(conta_id):
     })
 
     return response
+
+@app.route('/categoria/', methods=['POST'])
+def post_categoria():
+    req = request.json
+    
+    categoria = Categoria(desc = req['categoria_desc'])
+    db.session.add(categoria)
+    db.session.commit()
+
+
+    cc = ContaCategoria(conta_id = req['conta_id'], categoria_id = categoria.id)
+    db.session.add(cc)
+    db.session.commit()
+
+    response = jsonify({
+        'categoria_id': categoria.id,
+        'categoria_conta_id': cc.id,
+    })
+
+    return response
+
+@app.route('/login', methods=['POST'])
+def post_login():
+    req = request.json
+
+    email = req['email']
+    uid = req['uid']
+
+    usuario = db.session.query(Usuario).filter(Usuario.email == email, Usuario.uid == uid).first()
+
+    usuario_dict = usuario.asdict()
+
+    response = jsonify({
+        'usuario': usuario_dict,
+    })
+
+    return response
+
+@app.route('/home/<int:conta_id>', methods=['GET'])
+def get_home(conta_id):
+    gastos = db.session.que ry(db.func.sum(Transacao.valor)).filter(Transacao.tipo == 2, Transacao.conta_id == conta_id)
+    print(gastos)
+    return 'sucesso'
 
 
 
