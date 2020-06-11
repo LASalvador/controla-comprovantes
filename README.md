@@ -1,1 +1,1 @@
-#controla-comprovantes!
+#controla-comprovantes.
