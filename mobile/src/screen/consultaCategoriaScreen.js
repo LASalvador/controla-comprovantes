@@ -5,7 +5,7 @@ import CampoEntrada from '../components/CampoEntrada';
 import RNPickerSelect from 'react-native-picker-select';
 import Botao from '../components/Botao';
 
-export default class cadastroScreen extends React.Component {
+export default class consultaCategoriaScreen extends React.Component {
   state={
     name: "",
     email:"",
@@ -25,36 +25,12 @@ export default class cadastroScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>Cadastre-se</Text>
+        <Text style={styles.logo}>Categoria</Text>
         <View style={styles.inputView} >
-          <CampoEntrada 
-            placeholder="Digite seu nome"
-            entrada={this.state.name}
-          />
+          <Text>Teste</Text>
         </View>
-        <View style={styles.inputView} >
-          <CampoEntrada 
-            placeholder="Digite seu email"
-            entrada={this.state.email}
-          />
-        </View>
-        <View style={styles.inputView} >
-          <CampoEntrada 
-            placeholder="Digite sua senha"
-            entrada={this.state.password}
-          />
-        </View>
-        <View style={styles.fundo}>
-        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Pessoa Física', value: 'pessoaFisica' },
-                { label: 'Pessoa Jurídica', value: 'pessoaJuridica' },
-            ]}
-        />
-        </View>
-
-        <Botao onPress={this.handleSignUp} title="Cadastrar"/>
+        <Botao onPress={this.handleSignUp} title="Editar"/>
+        <Botao onPress={this.handleSignUp} title="Apagar"/>
       </View>
     );
   }

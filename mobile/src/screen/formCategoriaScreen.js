@@ -10,7 +10,7 @@ import {StyleSheet} from 'react-native';
 import Botao from '../components/Botao';
 import CampoEntrada from '../components/CampoEntrada';
 
-export default class loginScreen extends React.Component {
+export default class formCategoriaScreen extends React.Component {
   state={
     categoria:"",
   }

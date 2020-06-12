@@ -14,6 +14,8 @@ import cadastroScreen from './src/screen/cadastroScreen';
 import loginScreen from './src/screen/loginScreen';
 import categoriaScreen from './src/screen/categoriaScreen';
 import formCategotiaScreen from './src/screen/formCategoriaScreen';
+import consultaCategoriaScreen from './src/screen/consultaCategoriaScreen';
+import escolhaContaScreen from './src/screen/escolhaContaScreen';
 
 
 function SplashScreen() {
@@ -121,6 +123,11 @@ function App({navigation}) {
             </>
           ) : (
             <>
+               <Drawer.Screen 
+                name="Escolha a Conta" 
+                component={escolhaContaScreen}
+                initialParams={{authContext}}
+                />
               <Drawer.Screen 
                 name="Inicio" 
                 component={homeScreen}
@@ -137,6 +144,10 @@ function App({navigation}) {
                <Drawer.Screen 
                 name="Cadastro de Categoria" 
                 component={formCategotiaScreen} 
+              />
+              <Drawer.Screen 
+                name="Consultar Categoria" 
+                component={consultaCategoriaScreen} 
               />
               <Drawer.Screen 
                 name="Extrato" 
