@@ -31,6 +31,18 @@ export default class loginScreen extends React.Component {
       <Text style={styles.logo}>Transações</Text>
       <Form style={styles.inputView}>
          {/*<Text style={styles.topoText}>Categoria</Text>*/}
+
+         <View style={styles.fundo}>
+         {/*<Text style={styles.topoText}>Tipo</Text>*/}
+        <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Entrada', value: 'entrada' },
+                { label: 'Saída', value: 'saida' },
+            ]}
+        />
+        </View>
+        
          <View style={styles.fundo}>
         <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
             onValueChange={(value) => console.log(value)}
@@ -41,20 +53,6 @@ export default class loginScreen extends React.Component {
             ]}
         />
         </View>
-
-        <View style={styles.fundo}>
-         {/*<Text style={styles.topoText}>Tipo</Text>*/}
-        <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Água', value: 'agua' },
-                { label: 'Luz', value: 'luz' },
-                { label: 'Transporte', value: 'transporte' },
-            ]}
-        />
-        </View>
-
-
         <View style={styles.fundo}>
         <TextInput placeholder='Valor'/>
         </View>
