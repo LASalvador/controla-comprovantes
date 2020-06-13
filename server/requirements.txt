@@ -5,6 +5,6 @@ flask
 virtualenv
 sqlalchemy
 flask-sqlalchemy
-pip install flask-migrate
+flask-migrate
 python-dotenv
 
