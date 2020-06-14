@@ -159,7 +159,7 @@ def get_perfil():
     perfil_list = []
 
     for transacao in perfil_response:
-        perfil_list.append(transacao.asdict())
+        perfil_list.append(transacao)
 
     response = jsonify({
         'perfil': perfil_list
@@ -222,8 +222,8 @@ def post_login():
 
 @app.route('/home/<int:conta_id>', methods=['GET'])
 def get_home(conta_id):
-    gastos = db.session.que ry(db.func.sum(Transacao.valor)).filter(Transacao.tipo == 2, Transacao.conta_id == conta_id)
-    print(gastos)
+    #gastos = db.session.que ry(db.func.sum(Transacao.valor)).filter(Transacao.tipo == 2, Transacao.conta_id == conta_id)
+    #print(gastos)
     return 'sucesso'
 
 
