@@ -1,19 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Firebase from '../../config/firebase';
+import { StyleSheet, Text, View } from 'react-native';
 import CampoEntrada from '../components/CampoEntrada';
 import RNPickerSelect from 'react-native-picker-select';
 import Botao from '../components/Botao';
+import api from '../services/api';
 
 export default class cadastroScreen extends React.Component {
   state={
     name: "",
     email:"",
     password:"",
+    perfi_conta: ""
   }
 
   constructor (props) {
     super(props)
+  }
+
+  async componentDidMount () {
+    const response = await api.get('perfil');
+    console.log(response.data.perfil)
   }
    
   handleSignUp = () => {
@@ -45,8 +51,8 @@ export default class cadastroScreen extends React.Component {
           />
         </View>
         <View style={styles.fundo}>
-        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
-            onValueChange={(value) => console.log(value)}
+        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione o perfil ...',value: null,}}
+            onValueChange={(value) => this.setState({perfi_conta: value})}
             items={[
                 { label: 'Pessoa Física', value: 'pessoaFisica' },
                 { label: 'Pessoa Jurídica', value: 'pessoaJuridica' },
