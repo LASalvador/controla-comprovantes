@@ -29,19 +29,20 @@ export default class cadastroScreen extends React.Component {
         <View style={styles.inputView} >
           <CampoEntrada 
             placeholder="Digite seu nome"
-            entrada={this.state.name}
+            onChange={(item) => {this.setState({name: item})}}
           />
         </View>
         <View style={styles.inputView} >
           <CampoEntrada 
             placeholder="Digite seu email"
-            entrada={this.state.email}
+            onChange={(item) => {this.setState({email: item})}}
           />
         </View>
         <View style={styles.inputView} >
           <CampoEntrada 
             placeholder="Digite sua senha"
-            entrada={this.state.password}
+            onChange={(item) => {this.setState({password: item})}}
+            secure={true}
           />
         </View>
         <View style={styles.fundo}>
