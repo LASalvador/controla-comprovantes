@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import CampoEntrada from '../components/CampoEntrada';
+import Botao from '../components/Botao';
 
 export default class loginScreen extends React.Component {
   state={
@@ -26,29 +28,22 @@ export default class loginScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.logo}>Login</Text>
         <View style={styles.inputView} >
-          <TextInput  
-            style={styles.inputText}
-            placeholder="Digite seu email" 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({email:text})}/>
+          <CampoEntrada 
+            placeholder="Digite seu email"
+            onChange={(item) => {this.setState({email: item})}}
+          />
         </View>
         <View style={styles.inputView} >
-          <TextInput  
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Digite sua senha" 
-            placeholderTextColor="#003f5c"
-            onChangeText={text => this.setState({password:text})}/>
+        <CampoEntrada 
+            placeholder="Digite sua senha"
+            onChange={(item) => {this.setState({password: item})}}
+            secure={true}
+          />
         </View>
         <TouchableOpacity>
           <Text style={styles.forgot}>Esqueceu a senha?</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.loginBtn}
-          onPress={this.handleLogin}
-        >
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
+        <Botao onPress={this.handleSignUp} title="Login"/>
         <TouchableOpacity>
           <Text style={styles.loginText}>Cadastrar</Text>
         </TouchableOpacity>

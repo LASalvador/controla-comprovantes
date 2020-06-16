@@ -14,7 +14,8 @@ function CampoEntrada(props) {
             style={styles.inputText}
             placeholder={props.placeholder}
             placeholderTextColor="#003f5c"
-            onChangeText={text => props.entrada = text}
+            secureTextEntry={props.secure ? true : false}
+            onChangeText={text => props.onChange(text)}
         />
     );
 }
