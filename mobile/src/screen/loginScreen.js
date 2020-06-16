@@ -43,7 +43,7 @@ export default class loginScreen extends React.Component {
         <TouchableOpacity>
           <Text style={styles.forgot}>Esqueceu a senha?</Text>
         </TouchableOpacity>
-        <Botao onPress={this.handleSignUp} title="Login"/>
+        <Botao onPress={this.handleLogin} title="Login"/>
         <TouchableOpacity>
           <Text style={styles.loginText}>Cadastrar</Text>
         </TouchableOpacity>
