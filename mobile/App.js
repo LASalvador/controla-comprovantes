@@ -79,8 +79,16 @@ function App({navigation}) {
         await Firebase.auth().signInWithEmailAndPassword(data.email, data.password)
 
         const user = Firebase.auth().currentUser
-    
+        
+        const post_data = {
+          email: data.email,
+          uid: user.uid
+        }
+
+        const response = await api.post('login', post_data)
+
         await AsyncStorage.setItem('userToken', user.uid);
+        await AsyncStorage.setItem('userId', String(response.data.usuario.id));
         
         dispatch({ type: 'SIGN_IN', token: user.uid });
       },
