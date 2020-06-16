@@ -1,4 +1,5 @@
 mobile/node_modules
+mobile/package-lock.json
 node_modules
 server/token.pickle
 server/__pycache__
