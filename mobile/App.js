@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AsyncStorage, Text, View } from 'react-native';
 import Firebase from './config/firebase';
-
 import formScreen from './src/screen/formScreen';
 import homeScreen from './src/screen/homeScreen';
 import extratoScreen from './src/screen/extratoScreen';
@@ -13,6 +12,7 @@ import categoriaScreen from './src/screen/categoriaScreen';
 import formCategotiaScreen from './src/screen/formCategoriaScreen';
 import consultaCategoriaScreen from './src/screen/consultaCategoriaScreen';
 import escolhaContaScreen from './src/screen/escolhaContaScreen';
+import api from './src/services/api';
 
 
 function SplashScreen() {
@@ -79,7 +79,7 @@ function App({navigation}) {
         await Firebase.auth().signInWithEmailAndPassword(data.email, data.password)
 
         const user = Firebase.auth().currentUser
-
+    
         await AsyncStorage.setItem('userToken', user.uid);
         
         dispatch({ type: 'SIGN_IN', token: user.uid });
@@ -92,7 +92,18 @@ function App({navigation}) {
         await Firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         const user = Firebase.auth().currentUser
 
+        const post_data = {
+          nome: data.name,
+          email: data.email,
+          uid: user.uid,
+          perfil_id: data.perfil_conta
+        }
+
+        const response = await api.post('usuario', post_data);
+        
         await AsyncStorage.setItem('userToken', user.uid);
+        await AsyncStorage.setItem('userId', String(response.data.user_id));
+        await AsyncStorage.setItem('contaId', String(response.data.conta_id));
         
         dispatch({ type: 'SIGN_IN', token: user.uid });
       },

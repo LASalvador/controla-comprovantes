@@ -10,7 +10,7 @@ export default class cadastroScreen extends React.Component {
     name: "",
     email:"",
     password:"",
-    perfi_conta: "",
+    perfil_conta: "",
     lista_perfil: [],
   }
 
@@ -30,9 +30,9 @@ export default class cadastroScreen extends React.Component {
   }
    
   handleSignUp = () => {
-    const { email, password } = this.state
+    const { name, email, password, perfil_conta } = this.state
     const { signUp } = this.props.route.params.authContext
-    signUp({email, password})
+    signUp({name, email, password, perfil_conta})
   }
   
   render(){
@@ -60,7 +60,7 @@ export default class cadastroScreen extends React.Component {
         </View>
         <View style={styles.fundo}>
         <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione o perfil ...',value: null,}}
-            onValueChange={(value) => this.setState({perfi_conta: value})}
+            onValueChange={(value) => this.setState({perfil_conta: value})}
             items={this.state.lista_perfil}
         />
         </View>
