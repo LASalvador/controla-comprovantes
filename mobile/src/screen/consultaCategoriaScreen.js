@@ -1,8 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Firebase from '../../config/firebase';
-import CampoEntrada from '../components/CampoEntrada';
-import RNPickerSelect from 'react-native-picker-select';
+import { StyleSheet, Text, View} from 'react-native';
 import Botao from '../components/Botao';
 
 export default class consultaCategoriaScreen extends React.Component {

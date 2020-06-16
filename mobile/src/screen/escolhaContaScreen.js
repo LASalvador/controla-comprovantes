@@ -12,7 +12,7 @@ export default function categoriaScreen(){
     <View style={styles.container}>
       <Text style={styles.logo}>Conta</Text>
       <FlatList
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.key}
         data={categoria}
         renderItem={({ item }) => (
         <Text>{item.categoria}</Text>
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
   },
   logo:{
     fontWeight:"bold",
