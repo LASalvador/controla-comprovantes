@@ -11,10 +11,6 @@ export default class loginScreen extends React.Component {
     super(props)
   }
 
-  componentDidMount () {
-    console.log(this.props);
-  }
-
   render(){
     return (
       <View style={styles.container}>

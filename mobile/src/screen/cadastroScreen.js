@@ -10,7 +10,8 @@ export default class cadastroScreen extends React.Component {
     name: "",
     email:"",
     password:"",
-    perfi_conta: ""
+    perfi_conta: "",
+    lista_perfil: [],
   }
 
   constructor (props) {
@@ -19,7 +20,13 @@ export default class cadastroScreen extends React.Component {
 
   async componentDidMount () {
     const response = await api.get('perfil');
-    console.log(response.data.perfil)
+    const lista_perfil = response.data.perfil.map(item => { 
+      return {
+        label: item.desc,
+        value: item.id
+      }
+    })
+    this.setState({lista_perfil: lista_perfil})
   }
    
   handleSignUp = () => {
@@ -54,10 +61,7 @@ export default class cadastroScreen extends React.Component {
         <View style={styles.fundo}>
         <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione o perfil ...',value: null,}}
             onValueChange={(value) => this.setState({perfi_conta: value})}
-            items={[
-                { label: 'Pessoa Física', value: 'pessoaFisica' },
-                { label: 'Pessoa Jurídica', value: 'pessoaJuridica' },
-            ]}
+            items={this.state.lista_perfil}
         />
         </View>
 

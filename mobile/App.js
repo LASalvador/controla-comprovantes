@@ -2,10 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AsyncStorage, Text, View } from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
 import Firebase from './config/firebase';
-
-const AuthContext = React.createContext();
 
 import formScreen from './src/screen/formScreen';
 import homeScreen from './src/screen/homeScreen';
@@ -26,6 +23,7 @@ function SplashScreen() {
   );
 }
 
+const AuthContext = React.createContext();
 const Drawer = createDrawerNavigator();
 
 function App({navigation}) {
