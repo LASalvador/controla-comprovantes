@@ -1,60 +1,58 @@
 import * as React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form } from '@unform/mobile';
-import { Input } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { Picker } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { Icon } from 'react-native-elements';
 import {StyleSheet} from 'react-native';
+import api from '../services/api';
 
-export default class loginScreen extends React.Component {
+export default class formScreen extends React.Component {
   state={
-    name: "",
-    email:"",
-    password:"",
+    tp_transacao: '',
+    transacao_list: [],
+    categoria_list: [],
+    cat_transacao: '',
+    valor: '',
   }
 
   constructor (props) {
     super(props)
   }
-   
-  handleSignUp = () => {
-    const { email, password } = this.state
-    const { signUp } = this.props.route.params.authContext
-    signUp({email, password})
-  }
   
+  async componentDidMount () {
+    let response = await api.get('tptransacao');
+    const transacao_list = response.data.tipo_transacoes.map(item => {
+      return {
+        label: item.nome,
+        value: item.id
+      }
+    });
+    this.setState({transacao_list: transacao_list});
+    
+  }
   render(){
     return (
       <View style={styles.container}>
       <Text style={styles.logo}>Transações</Text>
       <Form style={styles.inputView}>
-         {/*<Text style={styles.topoText}>Categoria</Text>*/}
-
-         <View style={styles.fundo}>
-         {/*<Text style={styles.topoText}>Tipo</Text>*/}
-        <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Entrada', value: 'entrada' },
-                { label: 'Saída', value: 'saida' },
-            ]}
-        />
+        <View style={styles.fundo}>
+          <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
+              onValueChange={(value) => this.setState({tp_transacao: value})}
+              items={this.state.transacao_list}
+          />
         </View>
         
-         <View style={styles.fundo}>
-        <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Água', value: 'agua' },
-                { label: 'Luz', value: 'luz' },
-                { label: 'Transporte', value: 'transporte' },
-            ]}
-        />
+        <View style={styles.fundo}>
+          <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
+              onValueChange={(value) => console.log(value)}
+              items={[
+                  { label: 'Água', value: 'agua' },
+                  { label: 'Luz', value: 'luz' },
+                  { label: 'Transporte', value: 'transporte' },
+              ]}
+          />
         </View>
         <View style={styles.fundo}>
-        <TextInput placeholder='Valor'/>
+          <TextInput placeholder='Valor'/>
         </View>
       </Form>
 
