@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Form } from '@unform/mobile';
 import RNPickerSelect from 'react-native-picker-select';
 import {StyleSheet} from 'react-native';
@@ -28,6 +28,18 @@ export default class formScreen extends React.Component {
     });
     this.setState({transacao_list: transacao_list});
     
+    let conta_id =  await AsyncStorage.getItem("contaId");
+
+    response = await api.get(`categoria/${conta_id}`);
+
+    const categoria_list = response.data.categorias_conta.map(item => {
+      return { 
+        label: item.categoria_desc,
+        value: item.categoria_id
+      }
+    })
+    this.setState({categoria_list: categoria_list})
+
   }
   render(){
     return (
@@ -43,12 +55,8 @@ export default class formScreen extends React.Component {
         
         <View style={styles.fundo}>
           <RNPickerSelect style={styles.fundo} placeholder={{label: 'Selecione a categoria...',value: null,}}
-              onValueChange={(value) => console.log(value)}
-              items={[
-                  { label: 'Água', value: 'agua' },
-                  { label: 'Luz', value: 'luz' },
-                  { label: 'Transporte', value: 'transporte' },
-              ]}
+              onValueChange={(value) => this.setState({cat_transacao: value})}
+              items={this.state.categoria_list}
           />
         </View>
         <View style={styles.fundo}>

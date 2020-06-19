@@ -89,7 +89,8 @@ function App({navigation}) {
 
         await AsyncStorage.setItem('userToken', user.uid);
         await AsyncStorage.setItem('userId', String(response.data.usuario.id));
-        
+        await AsyncStorage.setItem('contaId', String(1));
+
         dispatch({ type: 'SIGN_IN', token: user.uid });
       },
       signOut: async () => { 
