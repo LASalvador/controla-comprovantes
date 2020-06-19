@@ -61,6 +61,12 @@ def post_usuario():
     db.session.add(usuarioConta)
     db.session.commit()
 
+    cc1 = ContaCategoria(conta_id = conta.id, categoria_id = 1)
+    cc2 = ContaCategoria(conta_id = conta.id, categoria_id = 2)
+    db.session.add(cc1)
+    db.session.add(cc2)
+    db.session.commit()
+
     response = jsonify({
         'user_id': usuario.id,
         'conta_id': conta.id
