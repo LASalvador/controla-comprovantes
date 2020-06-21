@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 export default class extratoScreen extends Component {
 
@@ -19,21 +20,23 @@ export default class extratoScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>
-          Extrato!
+         <FontAwesome5 name="coins" size={25} color="black"/>
+          Conta
         </Text>
 
+        <Text style={styles.saldo}>
+          Saldo disponivel
+        </Text>
         <TextInput
           style={styles.formInput}
-          placeholder="Insira seu saldo atual!"
+          placeholder="Ex: 2.000"
           value={this.state.myKey}
           onChangeText={(value) => this.setValue(value)}
           />      
 
-        <Text style={styles.instructions}>
+         {/*<Text style={styles.instructions}>
           Saldo = {this.state.myKey}
-        </Text>
-
-
+        </Text>*/}
       </View>
     );
   }
@@ -46,24 +49,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     justifyContent: 'center',
+    marginTop: -90,
   },
   logo:{
     fontWeight:"bold",
     fontSize:50,
     color:"#005795", 
-    marginBottom:40
+    marginBottom:40,
+    textAlign: 'center',
   },
   formInput: {
-    paddingLeft: 5,
+    paddingLeft: 55,
+    paddingRight: 55,
     height: 50,
     borderWidth: 1,
     borderColor: "#555555",
     borderRadius:25,
+    color: '#000',
+    marginRight: 130,
   },
-  formButton: {
-    borderWidth: 1,
-    borderColor: "#555555",
-
+  saldo:{
+    color: '#d6d6d6',
+    marginBottom: 10,
+    textAlign: 'left',
+    marginRight: 130,
+    fontSize: 20,
   },
   instructions: {
     textAlign: 'center',
