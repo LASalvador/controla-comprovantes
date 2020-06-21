@@ -1,11 +1,6 @@
 import * as React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { Form } from '@unform/mobile';
-import { Input } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { Picker } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import { Icon } from 'react-native-elements';
 import {StyleSheet} from 'react-native';
 import Botao from '../components/Botao';
 import CampoEntrada from '../components/CampoEntrada';
