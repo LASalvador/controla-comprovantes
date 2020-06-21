@@ -164,8 +164,8 @@ def get_perfil():
     perfil_response = Perfil.query.all()
     perfil_list = []
 
-    for transacao in perfil_response:
-        perfil_list.append(transacao)
+    for perfil in perfil_response:
+        perfil_list.append(perfil.asdict())
 
     response = jsonify({
         'perfil': perfil_list
