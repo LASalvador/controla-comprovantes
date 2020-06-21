@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-
 export default class extratoScreen extends Component {
 
   state={
