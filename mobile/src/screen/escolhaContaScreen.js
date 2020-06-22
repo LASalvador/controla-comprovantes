@@ -1,6 +1,8 @@
 import React , { useState }from 'react';
-import { Button, View, Text,  FlatList } from 'react-native';
+import { View, Text,  FlatList, Alert } from 'react-native';
 import {StyleSheet} from 'react-native';
+import BotaoFluante from '../components/BotaoFlutuante'
+
 
 
 export default function categoriaScreen(){
@@ -19,6 +21,7 @@ export default function categoriaScreen(){
         <Text>{item.categoria}</Text>
         )}
       />
+      <BotaoFluante />
     </View>
   )
 }
@@ -38,6 +41,23 @@ const styles = StyleSheet.create({
     color:"#005795", 
     marginBottom:40,
     marginTop:150
+  },
+
+  TouchableOpacityStyle: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 30,
+    bottom: 30,
+  },
+
+  FloatingButtonStyle: {
+    resizeMode: 'contain',
+    width: 50,
+    height: 50,
+    // backgroundColor:'black'
   },
   
 });

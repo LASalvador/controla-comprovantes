@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text,  FlatList, AsyncStorage } from 'react-native';
 import {StyleSheet} from 'react-native';
-import api from '../services/api'
+import api from '../services/api';
+import BotaoFlutuante from '../components/BotaoFlutuante';
 
 export default class categoriaScreen extends Component {
   state = {
@@ -31,7 +32,8 @@ export default class categoriaScreen extends Component {
         renderItem={({ item }) => (
           <Text>{item.categoria}</Text>
           )}
-          />
+        />
+        <BotaoFlutuante />
     </View>
     )
   }

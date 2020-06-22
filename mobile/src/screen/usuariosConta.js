@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, FlatList, AsyncStorage } from 'react-native'
 import {StyleSheet} from 'react-native'
 import api from '../services/api'
-
-const usuarios = [
-    {id: 1, nome: 'joao'},
-    {id: 2, nome: 'joaoa'},
-    {id: 3, nome: 'joaoeee'},
-]
+import BotaoFlutuante from '../components/BotaoFlutuante'
 
 export default class usuariosConta extends Component {
     state = {
@@ -39,6 +34,7 @@ export default class usuariosConta extends Component {
                         <Text>{item.nome}</Text>
                     )}
                 />
+                <BotaoFlutuante />
             </View>
         )
     }

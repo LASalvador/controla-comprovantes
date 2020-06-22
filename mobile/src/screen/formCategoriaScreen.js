@@ -34,7 +34,7 @@ export default class formCategoriaScreen extends React.Component {
         </View>
       </Form>
 
-      <Botao onPress={this.handleSignUp} title="Cadastrar"/>
+      <Botao title="Cadastrar"/>
       
     </View>
     );

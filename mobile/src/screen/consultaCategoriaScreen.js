@@ -26,8 +26,8 @@ export default class consultaCategoriaScreen extends React.Component {
         <View style={styles.inputView} >
           <Text>Teste</Text>
         </View>
-        <Botao onPress={this.handleSignUp} title="Editar"/>
-        <Botao onPress={this.handleSignUp} title="Apagar"/>
+        <Botao title="Editar"/>
+        <Botao title="Apagar"/>
       </View>
     );
   }
