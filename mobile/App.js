@@ -13,6 +13,9 @@ import formCategotiaScreen from './src/screen/formCategoriaScreen';
 import consultaCategoriaScreen from './src/screen/consultaCategoriaScreen';
 import escolhaContaScreen from './src/screen/escolhaContaScreen';
 import usuariosConta from './src/screen/usuariosConta';
+import novoUsuario from  './src/screen/novoUsuarioScreen';
+import novaConta from './src/screen/novaContaScreen';
+import grafico from './src/screen/graficoScreen';
 import api from './src/services/api';
 
 
@@ -175,6 +178,18 @@ function App({navigation}) {
               <Drawer.Screen 
                 name="Usuarios" 
                 component={usuariosConta} 
+              />
+              <Drawer.Screen 
+                name="Novo Usuario" 
+                component={novoUsuario} 
+              />
+              <Drawer.Screen 
+                name="Nova Conta" 
+                component={novaConta} 
+              />
+              <Drawer.Screen 
+                name="Graficos" 
+                component={grafico} 
               />
             </>
       )}
