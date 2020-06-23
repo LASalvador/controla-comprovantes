@@ -1,42 +1,87 @@
-import React , { useState }from 'react';
-import { Button, View, Text,  FlatList } from 'react-native';
-import {StyleSheet} from 'react-native';
+import React from 'react';
+import {
+  SafeAreaView,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Text,
+  Linking,
+} from 'react-native';
+import Constants from 'expo-constants';
 
+const DATA = [
+  {
+    title: 'Conta',
+  },
+  {
+    id: '1',
+    title: 'Pessoa Fisica',
+  },
+  {
+    id: '2',  
+    title: 'Pessoa Juridica',
+  },
+];
 
-export default function categoriaScreen(){
-  const [categoria] = useState([
-    {categoria: 'Pessoa Fisica', key:'1'},
-    {categoria: 'Pessoa Juridica', key:'2'}
-  ]);
-  
-  return(
-    <View style={styles.container}>
-      <Text style={styles.logo}>Conta</Text>
+function Item({ id, title, selected, onSelect }) {
+  return (
+    <TouchableOpacity
+      onPress={() => { Linking.openURL('http://google.com'); onSelect(id); }}
+      style={[
+        styles.item,
+        { backgroundColor: selected ? '#d6d6d6' : '#fff' },
+      ]}
+    >
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  );
+}
+
+export default function App() {
+  const [selected, setSelected] = React.useState(new Map());
+
+  const onSelect = React.useCallback(
+    id => {
+      const newSelected = new Map(selected);
+      newSelected.set(id, !selected.get(id));
+
+      setSelected(newSelected);
+    },
+    [selected],
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
       <FlatList
-        keyExtractor={(item) => item.id}
-        data={categoria}
+        data={DATA}
         renderItem={({ item }) => (
-        <Text>{item.categoria}</Text>
+          <Item
+            id={item.id}
+            title={item.title}
+            selected={!!selected.get(item.id)}
+            onSelect={onSelect}
+          />
         )}
+        keyExtractor={item => item.id}
+        extraData={selected}
       />
-    </View>
-  )
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Constants.statusBarHeight,
+  },
+  item: {
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize:100
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-  logo:{
-    fontWeight:"bold",
-    fontSize:50,
-    color:"#005795", 
-    marginBottom:40,
-    marginTop:150
+  title: {
+    fontSize: 25,
+    textAlign:'center',
   },
-  
 });
