@@ -25,12 +25,6 @@ export default class cadastroScreen extends React.Component {
     })
     this.setState({lista_perfil: lista_perfil})
   }
-   
-  handleSignUp = () => {
-    const { perfil_conta } = this.state
-    const { signUp } = this.props.route.params.authContext
-    signUp({ perfil_conta})
-  }
   
   render(){
     return (
@@ -43,7 +37,7 @@ export default class cadastroScreen extends React.Component {
         />
         </View>
 
-        <Botao onPress={this.handleSignUp} title="Cadastrar"/>
+        <Botao title="Cadastrar"/>
       </View>
     );
   }

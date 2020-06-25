@@ -21,6 +21,7 @@ export default class categoriaScreen extends Component {
         categoria: item.categoria_desc,
       }
     })
+    
     this.setState({categoria_list: categoria_list})
   }
 
@@ -36,7 +37,11 @@ export default class categoriaScreen extends Component {
         keyExtractor={(item) => item.id}
         data={this.state.categoria_list}
         renderItem={({ item }) => (
-          <Text>{item.categoria}</Text>
+          <Text 
+            style={styles.item}
+          >
+            {item.categoria}
+          </Text>
           )}
         />
         <BotaoFlutuante onclick={this.handleClick}/>
@@ -50,15 +55,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#e6f4ff',
-    alignItems: 'center',
-    justifyContent: 'center',
     marginTop: Constants.statusBarHeight,
   },
   logo:{
     fontWeight:"bold",
     fontSize:50,
     color:"#005795", 
-    marginBottom:40
+    marginBottom:40,
+    textAlign: 'center'
   },
-
+  item: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    padding: 20,
+    marginHorizontal: 16,
+  },
 });

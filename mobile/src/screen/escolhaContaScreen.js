@@ -1,41 +1,61 @@
-import React , { useState }from 'react';
+import React, { Component } from 'react'
 import { View, Text,  FlatList, Alert } from 'react-native';
 import {StyleSheet} from 'react-native';
 import BotaoFluante from '../components/BotaoFlutuante';
 import Constants from 'expo-constants';
 
-export default function categoriaScreen(){
-  const [categoria] = useState([
-    {categoria: 'Pessoa Fisica', key:'1'},
-    {categoria: 'Pessoa Juridica', key:'2'}
-  ]);
+export default class escolhaContaScreen extends Component {
   
-  return(
-    <View style={styles.container}>
+  state = {
+    contas_list: [{conta: 'Pessoa Fisica', key:'1'},{conta: 'Pessoa Juridica', key:'2'}],
+  }
+
+  handleClick = () => {
+    this.props.navigation.navigate('Nova Conta')
+  }
+
+  componentDidMount () {
+    // this.setState({contas_list: []})
+  }
+
+  handleChange = () => {
+    Alert.alert('mudaaar')
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
       <Text style={styles.logo}>Contas</Text>
       <FlatList
         keyExtractor={(item) => item.key}
-        data={categoria}
-        keyExtractor={item => item.id}
+        data={this.state.contas_list}
+        renderItem={({ item }) => (
+          <Text 
+            style={styles.item}
+            onPress={this.handleChange}
+          >
+            {item.conta}
+          </Text>
+          )}
       />
-      <BotaoFluante />
+      <BotaoFluante onclick={this.handleClick}/>
     </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
+    backgroundColor: '#e6f4ff',
   },
   item: {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 30,
-    fontSize:100,
+    marginTop: 10,
     padding: 20,
-    marginVertical: 8,
     marginHorizontal: 16,
   },
   logo:{
@@ -46,4 +66,5 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
 });
+
 
