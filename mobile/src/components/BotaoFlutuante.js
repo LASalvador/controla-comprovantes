@@ -1,7 +1,5 @@
-import React from 'react'
-import { TouchableOpacity, Image, StyleSheet, Alert } from 'react-native'
-
-
+import * as React from 'react';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native'
 import plusImg from '../../assets/plus.png'
 
 const styles = StyleSheet.create({
@@ -19,29 +17,20 @@ const styles = StyleSheet.create({
       resizeMode: 'contain',
       width: 50,
       height: 50,
-      // backgroundColor:'black'
     },
     
   });
 
 
-export default function BotaoFlutuante() {
-    function clickHandler() {
-        //function to handle click on floating Action Button
-        Alert.alert('Floating Button Clicked');
-    };
+export default function BotaoFlutuante(props) {
 
     return (
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={clickHandler}
+          onPress={props.onclick}
           style={styles.TouchableOpacityStyle}>
           <Image
-            //We are making FAB using TouchableOpacity with an image
-            //We are using online image here
              source={plusImg}
-            //You can use you project image Example below
-            //source={require('./images/float-add-icon.png')}
             style={styles.FloatingButtonStyle}
           />
         </TouchableOpacity>
