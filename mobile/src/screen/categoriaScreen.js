@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text,  FlatList, AsyncStorage } from 'react-native';
 import {StyleSheet} from 'react-native';
+import Constants from 'expo-constants';
 import api from '../services/api';
 import BotaoFlutuante from '../components/BotaoFlutuante';
 
 export default class categoriaScreen extends Component {
   state = {
     categoria_list: [],
+    to: "Cadastro de Categoria"
   }
 
   async componentDidMount () {
@@ -22,6 +24,10 @@ export default class categoriaScreen extends Component {
     this.setState({categoria_list: categoria_list})
   }
 
+  handleClick = () => {
+    this.props.navigation.navigate('Cadastro de Categoria')
+  }
+
   render() {
     return (
     <View style={styles.container}>
@@ -33,7 +39,7 @@ export default class categoriaScreen extends Component {
           <Text>{item.categoria}</Text>
           )}
         />
-        <BotaoFlutuante />
+        <BotaoFlutuante onclick={this.handleClick}/>
     </View>
     )
   }
@@ -43,10 +49,10 @@ export default class categoriaScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#e6f4ff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:40, 
+    marginTop: Constants.statusBarHeight,
   },
   logo:{
     fontWeight:"bold",
