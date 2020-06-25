@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Form } from '@unform/mobile';
+import { View, Text, AsyncStorage } from 'react-native';
 import {StyleSheet} from 'react-native';
+import Constants from 'expo-constants';
 import Botao from '../components/Botao';
 import CampoEntrada from '../components/CampoEntrada';
+import api from '../services/api';
 
 export default class formCategoriaScreen extends React.Component {
   state={
@@ -13,28 +14,33 @@ export default class formCategoriaScreen extends React.Component {
   constructor (props) {
     super(props)
   }
-   
-  handleSignUp = () => {
-    const { email, password } = this.state
-    const { signUp } = this.props.route.params.authContext
-    signUp({email, password})
-  }
   
+  handleClick = async () => {
+    let conta_id =  await AsyncStorage.getItem("contaId");
+
+    const response = await api.post('categoria', {
+      categoria_desc: this.state.categoria,
+      conta_id: conta_id
+    });
+
+    this.props.navigation.navigate('Categoria');
+  }
+
   render(){
     return (
       <View style={styles.container}>
       <Text style={styles.logo}>Cadastro de Categoria</Text>
-      <Form style={styles.inputView}>
-         {/*<Text style={styles.topoText}>Categoria</Text>*/}
-         <View style={styles.inputView} >
-          <CampoEntrada 
-            placeholder="Categoria"
-            entrada={this.state.categoria}
-          />
-        </View>
-      </Form>
+      <View style={styles.inputView} >
+        <CampoEntrada 
+          placeholder="Categoria"
+          onChange={(item) => {this.setState({categoria: item})}}
+        />
+      </View>
 
-      <Botao title="Cadastrar"/>
+      <Botao 
+        title="Cadastrar"
+        onPress={this.handleClick}
+      />
       
     </View>
     );
@@ -44,53 +50,25 @@ export default class formCategoriaScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Constants.statusBarHeight,
     backgroundColor: '#e6f4ff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   logo:{
     fontWeight:"bold",
-    fontSize:50,
+    fontSize:40,
     color:"#005795", 
-    /*marginBottom:40*/
-    margin: 40
+    marginBottom:40,
+    textAlign: 'center'
   },
-  fundo:{
+  inputView: {
     width:"80%",
     backgroundColor:"#fff",
-    /*borderRadius:25,*/
+    borderRadius:25,
     height:50,
     marginBottom:20,
     justifyContent:"center",
-    padding:10
-  },
-  inputText:{
-    height:50,
-    color:"black",
-    justifyContent:"center",
-    textAlign: "center",
-    marginTop: 18,
-    fontSize:20
-  },
-  loginBtn:{
-    width:"50%",
-    backgroundColor:"#005796",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:20,
-    marginBottom:10
-  },
-  loginText:{
-    color: "white",
-  },
-  /*topoText:{
-    color: "#000",
-  },*/
-  valortext:{
-    color: "black",
-  },
-
-  
+    padding:20
+  }
 });
