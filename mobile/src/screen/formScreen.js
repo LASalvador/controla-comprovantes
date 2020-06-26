@@ -12,6 +12,7 @@ export default class formScreen extends React.Component {
     categoria_list: [],
     cat_transacao: '',
     valor: '',
+    desc: '',
   }
 
   constructor (props) {
@@ -41,11 +42,35 @@ export default class formScreen extends React.Component {
     this.setState({categoria_list: categoria_list})
 
   }
+
+  handleClick = async () => { 
+    let conta_id =  await AsyncStorage.getItem("contaId");
+    let user_id =  await AsyncStorage.getItem("userId");
+
+    await api.post('transacao', {
+      desc: desc,
+      tipo_id: tp_transacao,
+      valor: valor,
+      categoria_id: cat_transacao,
+      conta_id: conta_id,
+      usuario_id: user_id,
+
+    })
+
+    this.props.navigation.navigate('Inicio')
+  }
+
   render(){
     return (
       <View style={styles.container}>
       <Text style={styles.logo}>Transações</Text>
       <Form style={styles.inputView}>
+        <View style={styles.fundo}>
+          <TextInput 
+            placeholder='Descrição'
+            onChange={item => this.setState({desc: item})}
+          />
+        </View>
         <View style={styles.fundo}>
           <RNPickerSelect placeholder={{label: 'Selecione o tipo...',value: null,}}
               onValueChange={(value) => this.setState({tp_transacao: value})}
@@ -60,7 +85,10 @@ export default class formScreen extends React.Component {
           />
         </View>
         <View style={styles.fundo}>
-          <TextInput placeholder='Valor'/>
+          <TextInput 
+            placeholder='Valor'
+            onChange={item => this.setState({valor: item})}
+          />
         </View>
       </Form>
 
