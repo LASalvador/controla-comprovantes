@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Form } from '@unform/mobile';
 import RNPickerSelect from 'react-native-picker-select';
 import {StyleSheet} from 'react-native';
 import api from '../services/api';
+import CampoEntrada from '../components/CampoEntrada';
+import Botao from '../components/Botao';
 
 export default class formScreen extends React.Component {
   state={
-    tp_transacao: '',
+    tp_transacao: "",
     transacao_list: [],
     categoria_list: [],
-    cat_transacao: '',
-    valor: '',
-    desc: '',
+    cat_transacao: "",
+    valor: "",
+    desc: "",
   }
 
   constructor (props) {
@@ -47,11 +49,12 @@ export default class formScreen extends React.Component {
     let conta_id =  await AsyncStorage.getItem("contaId");
     let user_id =  await AsyncStorage.getItem("userId");
 
+    
     await api.post('transacao', {
-      desc: desc,
-      tipo_id: tp_transacao,
-      valor: valor,
-      categoria_id: cat_transacao,
+      desc: this.state.desc,
+      tipo_id: this.state.tp_transacao,
+      valor: this.state.valor,
+      categoria_id: this.state.cat_transacao,
       conta_id: conta_id,
       usuario_id: user_id,
 
@@ -66,9 +69,9 @@ export default class formScreen extends React.Component {
       <Text style={styles.logo}>Transações</Text>
       <Form style={styles.inputView}>
         <View style={styles.fundo}>
-          <TextInput 
-            placeholder='Descrição'
-            onChange={item => this.setState({desc: item})}
+          <CampoEntrada 
+            placeholder="Descricao"
+            onChange={(item) => {this.setState({desc: item})}}
           />
         </View>
         <View style={styles.fundo}>
@@ -85,24 +88,19 @@ export default class formScreen extends React.Component {
           />
         </View>
         <View style={styles.fundo}>
-          <TextInput 
-            placeholder='Valor'
-            onChange={item => this.setState({valor: item})}
+          <CampoEntrada 
+            placeholder="Valor"
+            onChange={(item) => {this.setState({valor: item})}}
           />
         </View>
       </Form>
-
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Foto</Text>
-        </TouchableOpacity>
-
-      <TouchableOpacity 
-        style={styles.loginBtn}
+      <Botao
+        title="Foto"
+      ></Botao>
+      <Botao 
+        title="Salvar Transacao"
         onPress={this.handleClick}
-      >
-        <Text style={styles.loginText}>Enviar</Text>
-      </TouchableOpacity>
-      
+      />
     </View>
     );
   }
@@ -118,46 +116,15 @@ const styles = StyleSheet.create({
   logo:{
     fontWeight:"bold",
     fontSize:50,
-    color:"#005795", 
-    /*marginBottom:40*/
-    margin: 40
+    color:"#005795",
   },
   fundo:{
     width:"80%",
     backgroundColor:"#fff",
-    /*borderRadius:25,*/
+    borderRadius:25,
     height:50,
     marginBottom:20,
     justifyContent:"center",
-    padding:10
-  },
-  inputText:{
-    height:50,
-    color:"black",
-    justifyContent:"center",
-    textAlign: "center",
-    marginTop: 18,
-    fontSize:20
-  },
-  loginBtn:{
-    width:"50%",
-    backgroundColor:"#005796",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:20,
-    marginBottom:10
-  },
-  loginText:{
-    color: "white",
-  },
-  /*topoText:{
-    color: "#000",
-  },*/
-  valortext:{
-    color: "black",
-  },
-
-  
+    padding:10,
+  }
 });
