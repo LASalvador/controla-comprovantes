@@ -30,9 +30,10 @@ export default class escolhaContaScreen extends Component {
   }
 
   handleChange = async (conta_id) => {
+    const { signUp } = this.props.route.params.authContext
     const { switchAccount } = this.props.route.params.authContext
     await switchAccount({conta_id})
-    this.props.navigation.navigate()
+    this.props.navigation.navigate('Inicio')
   }
 
   render() {
