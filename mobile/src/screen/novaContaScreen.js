@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import CampoEntrada from '../components/CampoEntrada';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import Botao from '../components/Botao';
 import api from '../services/api';
@@ -26,6 +25,14 @@ export default class cadastroScreen extends React.Component {
     this.setState({lista_perfil: lista_perfil})
   }
   
+  handleClick = async () => {
+    const user_id = await AsyncStorage.getItem('userId');
+    const response = await api.post('nova_conta', {
+      perfil_id: this.state.perfil_conta,
+      usuario_id: user_id
+    })
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -37,7 +44,10 @@ export default class cadastroScreen extends React.Component {
         />
         </View>
 
-        <Botao title="Cadastrar"/>
+        <Botao 
+          title="Cadastrar"
+          onPress={this.handleClick}
+        />
       </View>
     );
   }

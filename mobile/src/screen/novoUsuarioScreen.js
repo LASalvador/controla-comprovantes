@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CampoEntrada from '../components/CampoEntrada';
-import RNPickerSelect from 'react-native-picker-select';
 import Botao from '../components/Botao';
 import api from '../services/api';
 
@@ -18,7 +17,23 @@ export default class novoUsuarioScreen extends React.Component {
    
   handleSignUp = () => {
     const { name, email, password } = this.state
+    
+    await Firebase.auth().createUserWithEmailAndPassword(email, password)
+    const conta_id = await AsyncStorage.getItem('contaId');
+
+    const user = Firebase.auth().currentUser
+
+    const post_data = {
+      nome: name,
+      email: email,
+      uid: user.uid,
+      conta_id: conta_id,
+    }
+
+    const response = await api.post('novo', post_data);
+    
   }
+
   
   render(){
     return (
