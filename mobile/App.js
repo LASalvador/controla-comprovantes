@@ -75,11 +75,13 @@ function App({navigation}) {
 
       try {
         userToken = await AsyncStorage.getItem('userToken');
+        conta_id = await AsyncStorage.getItem('contaId');
       } catch (e) {
         navigation.navigation.navigate('Login')
       }
       
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+      dispatch({type: 'SWITCH', conta: conta_id})
     };
     
     bootstrapAsync();
@@ -176,6 +178,7 @@ function App({navigation}) {
               <Drawer.Screen 
                 name="Inicio" 
                 component={homeScreen}
+                initialParams={{authContext}}
                 />
               <Drawer.Screen 
                 name="Transacoes" 
