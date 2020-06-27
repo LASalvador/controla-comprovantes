@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 export default class loginScreen extends React.Component {
   state={
