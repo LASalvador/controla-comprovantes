@@ -1,50 +1,42 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
-import { FontAwesome5 } from '@expo/vector-icons'; 
-import { ListItem, FlatList } from 'react-native-elements';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import Constants from 'expo-constants';
-
-
-const list = [
-{
-  name: 'Alimentação',
-  tipo: 'saida',
-  valor: '560.00'
-},
-{
-  name: 'Transporte',
-  tipo: 'saida',
-  valor: '1.000',
-},
-{
-  name: 'Salário',
-  tipo: 'entrada',
-  valor: '4.000',
-},
-{
-  name: 'Mercado',
-  tipo: 'saida',
-  valor: '800.00',
-},
-
-]
-
-
+import api from '../services/api';
 
 export default class extratoScreen extends Component {
 
+  state = {
+    transacoes_list: [],
+  }
+  
+  async componentDidMount() {
+    const conta_id = await AsyncStorage.getItem('contaId');
+
+    const response = await api.get(`transacoes/${conta_id}`);
+
+    this.setState({transacoes_list: response.data.transacoes});
+  }
+
  render() {
   return (
-    <View style={{background:'#fff',}}>
-   <Text style={{fontSize: 55,color: "#005795",textAlign: 'center',fontWeight:"bold",marginBottom:40,marginTop: Constants.statusBarHeight,}}>Extrato</Text>
+    <View style={styles.container}>
+   <Text style={styles.logo}>Extrato</Text>
     {
-      list.map((l, i) => (
-        <ListItem style={{marginTop: 10,}}
-        key={i}
-        title={l.name}
-        subtitle={l.tipo}
-        rightTitle={l.valor}
-        bottomDivider
+      this.state.transacoes_list.map((item, i) => (
+        <ListItem style={styles.item}
+          key={i}
+          title={item.desc}
+          subtitle={
+            <View>
+              <Text>{item.categoria_desc}</Text>
+              <Text>{item.tipo_desc}</Text>
+              <Text>{item.tipo_desc}</Text>
+              <Text>{item.usuario_nome}</Text>
+            </View>
+          }
+          rightTitle={item.valor}
+          bottomDivider
         />
 
         ))
@@ -54,3 +46,20 @@ export default class extratoScreen extends Component {
   )
 }}
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#e6f4ff'
+  },
+  logo: {
+    fontWeight:"bold",
+    fontSize:50,
+    color:"#005795",
+    textAlign: 'center',
+    marginBottom:30,
+    marginTop: Constants.statusBarHeight
+  },
+  item: {
+    marginTop: 10,
+  }
+})
