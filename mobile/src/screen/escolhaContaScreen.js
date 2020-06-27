@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text,  FlatList, AsyncStorage } from 'react-native';
+import { View, Text,  FlatList, AsyncStorage, TouchableOpacity, Alert } from 'react-native';
 import {StyleSheet} from 'react-native';
 import BotaoFluante from '../components/BotaoFlutuante';
 import Constants from 'expo-constants';
@@ -29,8 +29,10 @@ export default class escolhaContaScreen extends Component {
 
   }
 
-  handleChange = () => {
-    
+  handleChange = async (conta_id) => {
+    const { switchAccount } = this.props.route.params.authContext
+    await switchAccount({conta_id})
+    this.props.navigation.navigate()
   }
 
   render() {
@@ -41,12 +43,12 @@ export default class escolhaContaScreen extends Component {
         keyExtractor={(item) => item.key}
         data={this.state.contas_list}
         renderItem={({ item }) => (
-          <Text 
+          <TouchableOpacity 
             style={styles.item}
-            onPress={this.handleChange}
+            onPress={() => this.handleChange(item.key)}
           >
-            {item.conta}
-          </Text>
+            <Text>{item.conta}</Text>
+          </TouchableOpacity>
           )}
       />
       <BotaoFluante onclick={this.handleClick}/>
