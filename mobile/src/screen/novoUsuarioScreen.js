@@ -15,7 +15,7 @@ export default class novoUsuarioScreen extends React.Component {
     super(props)
   }
    
-  handleSignUp = () => {
+  handleSignUp = async () => {
     const { name, email, password } = this.state
     
     await Firebase.auth().createUserWithEmailAndPassword(email, password)

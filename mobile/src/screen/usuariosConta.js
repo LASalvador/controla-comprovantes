@@ -43,7 +43,7 @@ export default class usuariosConta extends Component {
                         </Text>
                     )}
                 />
-                <BotaoFlutuante />
+                <BotaoFlutuante onclick={this.handleClick}/>
             </View>
         )
     }
