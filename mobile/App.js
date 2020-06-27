@@ -45,19 +45,27 @@ function App({navigation}) {
             ...prevState,
             isSignout: false,
             userToken: action.token,
+            account_id: action.conta,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
             isSignout: true,
             userToken: null,
+            account_id: null,
           };
+        case 'SWITCH':
+          return {
+            ...prevState,
+            account_id: action.conta
+          }
       }
     },
     {
       isLoading: true,
       isSignout: false,
       userToken: null,
+      account_id: null,
     }
   );
 
@@ -93,9 +101,9 @@ function App({navigation}) {
 
         await AsyncStorage.setItem('userToken', user.uid);
         await AsyncStorage.setItem('userId', String(response.data.usuario.id));
-        await AsyncStorage.setItem('contaId', String(1));
+        // await AsyncStorage.setItem('contaId', String(1));
 
-        dispatch({ type: 'SIGN_IN', token: user.uid });
+        dispatch({ type: 'SIGN_IN', token: user.uid , conta: null});
       },
       signOut: async () => { 
         await AsyncStorage.removeItem('userToken');
@@ -118,8 +126,14 @@ function App({navigation}) {
         await AsyncStorage.setItem('userId', String(response.data.user_id));
         await AsyncStorage.setItem('contaId', String(response.data.conta_id));
         
-        dispatch({ type: 'SIGN_IN', token: user.uid });
+        dispatch({ type: 'SIGN_IN', token: user.uid, conta: response.data.conta_id });
       },
+
+      switchAccount: async data => {
+        await AsyncStorage.setItem('contaId', String(data.conta_id));
+
+        dispatch({type: 'SWITCH', conta: data.conta_id})
+      }
     }),
     []
   );
@@ -143,6 +157,15 @@ function App({navigation}) {
                 initialParams={{authContext}}
                 />
             </>
+          ) : state.account_id == null ? (
+              <>
+                <Drawer.Screen 
+                  name="Escolha a Conta" 
+                  component={escolhaContaScreen}
+                  initialParams={{authContext}}
+                />
+              </>
+
           ) : (
             <>
                <Drawer.Screen 
@@ -153,7 +176,6 @@ function App({navigation}) {
               <Drawer.Screen 
                 name="Inicio" 
                 component={homeScreen}
-                initialParams={{authContext}}
                 />
               <Drawer.Screen 
                 name="Transacoes" 
