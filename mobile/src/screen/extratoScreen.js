@@ -5,18 +5,21 @@ import { ListItem, FlatList } from 'react-native-elements';
 import Constants from 'expo-constants';
 
 
-
-
 const list = [
 {
   name: 'Alimentação',
-  avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-  tipo: 'saida'
+  tipo: 'saida',
+  valor: '560.00'
 },
 {
   name: 'Transporte',
-  avatar_url: '  faces/twitter/adhamdannaway/128.jpg',
   tipo: 'saida',
+  valor: '1.000',
+},
+{
+  name: 'Salário',
+  tipo: 'entrada',
+  valor: '2.000',
 },
 
 ]
@@ -31,11 +34,11 @@ export default class extratoScreen extends Component {
    <Text style={{fontSize: 50,color: "#005795",textAlign: 'center',fontWeight:"bold",marginBottom:40,marginTop: Constants.statusBarHeight,}}>Extrato</Text>
     {
       list.map((l, i) => (
-        <ListItem
+        <ListItem style={{marginTop: 10,}}
         key={i}
-        leftAvatar={{ source: { uri: l.avatar_url } }}
         title={l.name}
         subtitle={l.tipo}
+        data={l.valor}
         bottomDivider
         />
 
