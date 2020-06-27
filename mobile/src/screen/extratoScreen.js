@@ -19,7 +19,12 @@ const list = [
 {
   name: 'Salário',
   tipo: 'entrada',
-  valor: '2.000',
+  valor: '4.000',
+},
+{
+  name: 'Mercado',
+  tipo: 'saida',
+  valor: '800.00',
 },
 
 ]
@@ -30,15 +35,15 @@ export default class extratoScreen extends Component {
 
  render() {
   return (
-    <View>
-   <Text style={{fontSize: 50,color: "#005795",textAlign: 'center',fontWeight:"bold",marginBottom:40,marginTop: Constants.statusBarHeight,}}>Extrato</Text>
+    <View style={{background:'#fff',}}>
+   <Text style={{fontSize: 55,color: "#005795",textAlign: 'center',fontWeight:"bold",marginBottom:40,marginTop: Constants.statusBarHeight,}}>Extrato</Text>
     {
       list.map((l, i) => (
         <ListItem style={{marginTop: 10,}}
         key={i}
         title={l.name}
         subtitle={l.tipo}
-        data={l.valor}
+        rightTitle={l.valor}
         bottomDivider
         />
 
