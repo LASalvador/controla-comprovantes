@@ -96,9 +96,12 @@ export default class formScreen extends React.Component {
           <Text style={styles.loginText}>Foto</Text>
         </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Enviar</Text>
-        </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.loginBtn}
+        onPress={this.handleClick}
+      >
+        <Text style={styles.loginText}>Enviar</Text>
+      </TouchableOpacity>
       
     </View>
     );
