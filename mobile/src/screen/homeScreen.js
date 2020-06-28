@@ -1,14 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage} from 'react-native';
+import api from '../services/api';
 
 export default class loginScreen extends React.Component {
   state={
-    email:"",
-    password:""
+    entradas: 0,
+    saidas: 0
   }
 
   constructor (props) {
     super(props)
+  }
+
+  async componentDidMount () {
+    const conta_id = await AsyncStorage.getItem('contaId');
+
+    const response = await api.get(`transacoes/${conta_id}`);
+    let entradas = 0;
+    let saidas = 0
+    
+    response.data.transacoes.forEach(item => {
+      if (item.tipo_id == 1) {
+        entradas += item.valor
+      } else {
+        saidas += item.valor
+      }
+    })
+
+    this.setState({entradas: entradas})
+    this.setState({saidas: saidas})
+  }
+
+  async componentDidUpdate () {
+    const conta_id = await AsyncStorage.getItem('contaId');
+
+    const response = await api.get(`transacoes/${conta_id}`);
+    let entradas = 0;
+    let saidas = 0
+    
+    response.data.transacoes.forEach(item => {
+      if (item.tipo_id == 1) {
+        entradas += item.valor
+      } else {
+        saidas += item.valor
+      }
+    })
+
+    this.setState({entradas: entradas})
+    this.setState({saidas: saidas})
   }
 
   render(){
@@ -17,22 +56,20 @@ export default class loginScreen extends React.Component {
         <Text style={styles.logo}>Controle</Text>
         <View style={styles.inputView} >
           <Text 
-            style={styles.inputText}
-            placeholderTextColor="#003f5c"
-           >Saldo: 1000</Text>
-        </View>
-        <View style={styles.inputView} >
-          <Text 
             style={styles.inputText} 
             placeholderTextColor="#003f5c"
-           >Despesas: 500</Text>
+          >
+            Receitas: {this.state.entradas}
+          </Text>
         </View>
         <View style={styles.inputView} >
           <Text
             secureTextEntry
             style={styles.inputText} 
             placeholderTextColor="#003f5c"
-          >Receita: 50</Text>
+           >
+             Despesas: {this.state.saidas}
+          </Text>
         </View>
 
         <TouchableOpacity 
