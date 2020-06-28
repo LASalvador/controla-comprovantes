@@ -96,6 +96,7 @@ export default class formScreen extends React.Component {
       </Form>
       <Botao
         title="Foto"
+        onPress={() => {this.props.navigation.navigate('camera')}}
       ></Botao>
       <Botao 
         title="Salvar Transacao"

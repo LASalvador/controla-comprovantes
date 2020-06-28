@@ -15,7 +15,7 @@ import escolhaContaScreen from './src/screen/escolhaContaScreen';
 import usuariosConta from './src/screen/usuariosConta';
 import novoUsuario from  './src/screen/novoUsuarioScreen';
 import novaConta from './src/screen/novaContaScreen';
-import grafico from './src/screen/graficoScreen';
+import camera from './src/screen/cameraScreen';
 import api from './src/services/api';
 
 
@@ -213,8 +213,8 @@ function App({navigation}) {
                 component={novaConta} 
               />
               <Drawer.Screen 
-                name="Graficos" 
-                component={grafico} 
+                name="camera" 
+                component={camera} 
               />
             </>
       )}
