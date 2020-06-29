@@ -24,6 +24,19 @@ export default class categoriaScreen extends Component {
     
     this.setState({categoria_list: categoria_list})
   }
+  async componentDidUpdate () {
+    let conta_id =  await AsyncStorage.getItem("contaId");
+
+    const response = await api.get(`categoria/${conta_id}`);
+    const categoria_list = response.data.categorias_conta.map(item => {
+      return { 
+        id: item.categoria_id,
+        categoria: item.categoria_desc,
+      }
+    })
+    
+    this.setState({categoria_list: categoria_list})
+  }
 
   handleClick = () => {
     this.props.navigation.navigate('Cadastro de Categoria')

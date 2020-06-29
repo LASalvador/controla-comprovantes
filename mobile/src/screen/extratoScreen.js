@@ -18,6 +18,16 @@ export default class extratoScreen extends Component {
     this.setState({transacoes_list: response.data.transacoes});
   }
 
+  async componentDidUpdate() {
+    const conta_id = await AsyncStorage.getItem('contaId');
+
+    const response = await api.get(`transacoes/${conta_id}`);
+
+    this.setState({transacoes_list: response.data.transacoes});
+  }
+
+
+
  render() {
   return (
     <View style={styles.container}>

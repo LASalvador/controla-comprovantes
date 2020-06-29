@@ -29,6 +29,20 @@ export default class escolhaContaScreen extends Component {
 
   }
 
+  async componentDidUpdate () {
+    const user_id = await AsyncStorage.getItem("userId");
+    const response = await api.get(`conta/${user_id}`);
+    const conta_list = response.data.contas_usuario.map(item => {
+      return {
+        key: item.conta_id,
+        conta:item.perfil
+      }
+    })
+
+    this.setState({contas_list: conta_list});
+
+  }
+
   handleChange = async (conta_id) => {
     const { signUp } = this.props.route.params.authContext
     const { switchAccount } = this.props.route.params.authContext

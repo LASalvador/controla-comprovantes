@@ -45,6 +45,30 @@ export default class formScreen extends React.Component {
 
   }
 
+  async componentDidUpdate () {
+    let response = await api.get('tptransacao');
+    const transacao_list = response.data.tipo_transacoes.map(item => {
+      return {
+        label: item.nome,
+        value: item.id
+      }
+    });
+    this.setState({transacao_list: transacao_list});
+    
+    let conta_id =  await AsyncStorage.getItem("contaId");
+
+    response = await api.get(`categoria/${conta_id}`);
+
+    const categoria_list = response.data.categorias_conta.map(item => {
+      return { 
+        label: item.categoria_desc,
+        value: item.categoria_id
+      }
+    })
+    this.setState({categoria_list: categoria_list})
+
+  }
+
   handleClick = async () => { 
     let conta_id =  await AsyncStorage.getItem("contaId");
     let user_id =  await AsyncStorage.getItem("userId");

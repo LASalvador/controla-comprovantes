@@ -23,6 +23,21 @@ export default class usuariosConta extends Component {
 
         this.setState({usuarios_list: usuarios_list})
     }
+    
+    async componentDidUpdate () {
+        const conta_id =  await AsyncStorage.getItem("contaId");
+
+        const response = await api.get(`usuarios/${conta_id}`);
+
+        const usuarios_list = response.data.usuarios_conta.map(item => {
+            return { 
+                id: item.usuario_id,
+                nome: item.usuario_nome,
+            }
+        })
+
+        this.setState({usuarios_list: usuarios_list})
+    }
 
     handleClick = () => {
         this.props.navigation.navigate('Novo Usuario')

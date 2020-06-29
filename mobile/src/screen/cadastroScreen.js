@@ -28,6 +28,17 @@ export default class cadastroScreen extends React.Component {
     })
     this.setState({lista_perfil: lista_perfil})
   }
+
+  async componentDidUpdate () {
+    const response = await api.get('perfil');
+    const lista_perfil = response.data.perfil.map(item => { 
+      return {
+        label: item.desc,
+        value: item.id
+      }
+    })
+    this.setState({lista_perfil: lista_perfil})
+  }
    
   handleSignUp = () => {
     const { name, email, password, perfil_conta } = this.state

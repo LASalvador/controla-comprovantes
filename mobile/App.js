@@ -193,10 +193,6 @@ function App({navigation}) {
                 component={formCategotiaScreen} 
               />
               <Drawer.Screen 
-                name="Consultar Categoria" 
-                component={consultaCategoriaScreen} 
-              />
-              <Drawer.Screen 
                 name="Extrato" 
                 component={extratoScreen} 
               />
