@@ -10,22 +10,13 @@ import cadastroScreen from './src/screen/cadastroScreen';
 import loginScreen from './src/screen/loginScreen';
 import categoriaScreen from './src/screen/categoriaScreen';
 import formCategotiaScreen from './src/screen/formCategoriaScreen';
-import consultaCategoriaScreen from './src/screen/consultaCategoriaScreen';
 import escolhaContaScreen from './src/screen/escolhaContaScreen';
 import usuariosConta from './src/screen/usuariosConta';
 import novoUsuario from  './src/screen/novoUsuarioScreen';
 import novaConta from './src/screen/novaContaScreen';
 import camera from './src/screen/cameraScreen';
+import SplashScreen from './src/screen/splashScreen';
 import api from './src/services/api';
-
-
-function SplashScreen() {
-  return (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-  );
-}
 
 const AuthContext = React.createContext();
 const Drawer = createDrawerNavigator();
@@ -58,6 +49,11 @@ function App({navigation}) {
           return {
             ...prevState,
             account_id: action.conta
+          };
+        case 'LOADING':
+          return {
+            ...prevState,
+            isLoading: action.value
           }
       }
     },
@@ -135,6 +131,9 @@ function App({navigation}) {
         await AsyncStorage.setItem('contaId', String(data.conta_id));
 
         dispatch({type: 'SWITCH', conta: data.conta_id})
+      },
+      loading: data => {
+        dispatch({type: 'LOADING', value: data.value})
       }
     }),
     []

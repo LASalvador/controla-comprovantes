@@ -4,11 +4,13 @@ import {StyleSheet} from 'react-native';
 import BotaoFluante from '../components/BotaoFlutuante';
 import Constants from 'expo-constants';
 import api from '../services/api';
+import SplashScreen from './splashScreen';
 
 export default class escolhaContaScreen extends Component {
   
   state = {
     contas_list: [],
+    carregando: null,
   }
 
   handleClick = () => {
@@ -16,6 +18,7 @@ export default class escolhaContaScreen extends Component {
   }
 
   async componentDidMount () {
+    this.setState({carregando:true})
     const user_id = await AsyncStorage.getItem("userId");
     const response = await api.get(`conta/${user_id}`);
     const conta_list = response.data.contas_usuario.map(item => {
@@ -24,9 +27,10 @@ export default class escolhaContaScreen extends Component {
         conta:item.perfil
       }
     })
-
+    
     this.setState({contas_list: conta_list});
-
+    this.setState({carregando:false})
+    
   }
 
   async componentDidUpdate () {
@@ -53,21 +57,25 @@ export default class escolhaContaScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <Text style={styles.logo}>Contas</Text>
-      <FlatList
-        keyExtractor={(item) => item.key}
-        data={this.state.contas_list}
-        renderItem={({ item }) => (
-          <TouchableOpacity 
-            style={styles.item}
-            onPress={() => this.handleChange(item.key)}
-          >
-            <Text>{item.conta}</Text>
-          </TouchableOpacity>
-          )}
-      />
-      <BotaoFluante onclick={this.handleClick}/>
-    </View>
+        {this.state.carregando === true ? <SplashScreen /> : (
+          <View style={styles.parent}>
+            <Text style={styles.logo}>Contas</Text>
+            <FlatList
+              keyExtractor={(item) => item.key}
+              data={this.state.contas_list}
+              renderItem={({ item }) => (
+                <TouchableOpacity 
+                  style={styles.item}
+                  onPress={() => this.handleChange(item.key)}
+                >
+                  <Text>{item.conta}</Text>
+                </TouchableOpacity>
+                )}
+            />
+            <BotaoFluante onclick={this.handleClick}/>
+          </View>
+        )}
+      </View>
     )
   }
 }
@@ -77,6 +85,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: '#e6f4ff',
+  },
+  parent:{
+    flex: 1,
   },
   item: {
     backgroundColor: '#fff',
